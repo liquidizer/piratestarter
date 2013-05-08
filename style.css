@@ -1,0 +1,41 @@
+body {
+    font-family: Arial;
+    align: center;
+    background-color: white;
+ }
+
+table {
+    width: 100%;
+}
+
+input {
+    text-align: right;
+}
+
+div.nextButton {
+    text-align: center;
+    width: 10em;
+    border-radius: 5px;
+    margin: 0.5em auto 1em auto;
+    padding: 1em;
+    color: white;
+    background-color: orange;
+    font-weight: bold;
+}
+
+div.nextButton:hover {
+    background-color: red;
+}
+
+.backButton {
+    margin: 0 1em 0 0;
+}
+
+.backButton:hover {
+    background-color: lightgray;
+}
+
+.page {
+    width: 98%;
+    position: absolute;
+}
