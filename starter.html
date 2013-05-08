@@ -7,184 +7,153 @@
     <script type="text/javascript" src="http://code.jquery.com/ui/jquery-ui-git.js"></script>
     <script type="text/javascript" src="starter.js"></script>
   </head>
-  <body>
+  <body class="high">
+    <div id="header">
+      <a href="http://www.piratestarter.de" target="_blank">PirateStarter</a>
+    </div>
+    <div id="footer">
+      <a href="http://www.piratestarter.de" target="_blank">Homepage: www.piratestarter.de</a>
+    </div>
     <div id="page1" class="page">
-      <table>
-	<tr>
-	  <td>
-	    Bisherige Zusagen: 999.999€
-	    <br/>
-	    Bisher Eingegangen: 1€
-	  </td>
-	  <td>
-	    <div class="nextButton" to="page2">
-	      Jetzt<br/>spenden!
-	    </div>
-	  </td>
-	</tr>
-      </table>
+      <div class="text">
+	Bisher eingegange Spenden:
+	<p style="text-align:center; font-weight:bold; font-size:30px;">
+	  100€
+	</p>
+      </div>
+      <div class="text">
+	Offene Zusagen: 999€
+      </div>
+      <div class="nextButton" to="page2">
+	Jetzt<br/>spenden!
+      </div>
     </div>
     <div id="page2" class="page">
-      <table>
-	<tr>
-	  <td rowspan="3"><img src="back.png" class="backButton"/></td>
-	  <td>Betrag:</td>
-	  <td>Spendenzweck:</td>
-	  <td rowspan="3">
-	    <div class="nextButton" to="page3">
-	      Weiter zur
-	      <br/>
-	      Bezahlung
-	    </div>
-	  </td>
-	</tr>
-	<tr>
-	  <td>
-	    <input name="betrag" id="betrag" value="25.00" size="12"/>€
-	    <br/>
-	    <input type="button" value="weniger" onclick="betragMehr(.5)"/>
-	    <input type="button" value="mehr" onclick="betragMehr(2)"/>
-	  </td>
-	  <td>
-	    <select name="zweck" id="zweck">
-	      <option value="any">Wahlkampf</option>
-	      <option value="kvmuc">KV München</option>
-	      <option value="kvmuc">KV München</option>
-	      <option value="KVMuc">KV München</option>
-	      <option value="BzVOBB">BzV Oberbayern</option>
-	    </select>
-	  </td>
-	</tr>
-      </table>
+      <div class="backButton">Zurück</div>
+      <div class="text">
+	Betrag:
+	<input name="betrag" id="betrag" value="25" size="6" style="text-align: right"/>€
+	<br/>
+	<input type="button" value="weniger" onclick="betragMehr(.5)"/>
+	<input type="button" value="mehr" onclick="betragMehr(2)" style="float:right"/>
+      </div>
+      <div class="text">
+	Für:<br/>
+	<select name="zweck" id="zweck">
+	  <option value="wahlkampf">Wahlkampf Bayern</option>
+	</select>
+      </div>
+      <div class="nextButton" to="page3">
+	Weiter zur
+	<br/>
+	Bezahlung
+      </div>
     </div>
     <div class="page" id="page3">
-      <table>
-	<tr>
-	  <td><img src="back.png" class="backButton"/></td>
-	  <td>
-	    <div class="nextButton" to="lastschrift">
-	      Bezahlung per
-	      <br>
-	      Lastschrift
-	    </div>
-	  </td>
-	  <td>
-	    <div class="nextButton" to="ueberweisen">
-	      Bezahlung per
-	      <br>
-	      Überweisung
-	    </div>
-	  </td>
-	</tr>
-      </table>
+      <div class="backButton">Zurück</div>
+      <div class="nextButton" to="lastschrift">
+	Bezahlung per
+	<br>
+	Lastschrift
+      </div>
+      <div class="nextButton" to="ueberweisen">
+	Bezahlung per
+	<br>
+	Überweisung
+      </div>
     </div>
     <div class="page" id="lastschrift">
-      <table>
-	<tr>
-	  <td rowspan="4"><img src="back.png" class="backButton"/></td>
-	  <td>Name:</td>
-	  <td><input name="name"/></td>
-	  <td rowspan="3">
-	    <div class="nextButton" to="lastschrift2">
-	      Weiter
-	    </div>
-	  </td>
-	</tr>
-	<tr>
-	  <td>Konto:</td>
-	  <td><input name="konto"/></td>
-	</tr>
-	<tr>
-	  <td>BLZ:</td>
-	  <td><input name="blz"/></td>
-	</tr>
-      </table>
+      <div class="backButton">Zurück</div>
+      <div class="text">
+	Kontoinhaber:<br/>
+	<input name="kontoinhaber" size="18"/><br/>
+	Konto:<br/>
+	<input name="konto" size="18"/><br/>
+	BLZ:<brl>
+	<input name="blz" size="18"/><br/>
+      </div>
+      <div class="nextButton" to="lastschrift2">
+	Weiter
+      </div>
     </div>
     <div class="page" id="lastschrift2">
-      <table>
-	<tr>
-	  <td rowspan="4"><img src="back.png" class="backButton"/></td>
-	  <td>Mitgliedsnummer:</td>
-	  <td><input name="mitglied"/></td>
-	  <td rowspan="3">
-	    <div class="nextButton" to="lastschrift3">
-	      Weiter
-	    </div>
-	  </td>
-	</tr>
-	<tr>
-	  <td>Adresse<br/>(falls kein Mitglied):</td>
-	  <td><textarea name="konto" rows="3"></textarea></td>
-	</tr>
-      </table>
+      <div class="backButton">Zurück</div>
+      <div class="text">
+	Mitgliedsnummer:<br/>
+	(falls zur Hand)<br/>
+	<input name="mitglied"/>
+      </div>
+      <div class="text">
+	Spendername:<br/>
+	<input name="spender"/>
+      </div>
+      <div class="nextButton" to="lastschrift3">
+	Weiter
+      </div>
     </div>
     <div class="page" id="lastschrift3">
-      <table>
-	<tr>
-	  <td><img src="back.png" class="backButton"/></td>
-	  <td>
-	    Wir buchen <span name="betrag" type="input">?</span>€ 
-	    für <span name="zweck" type="select">?</span> von deinem
-	    Konto ab.
-	  </td>
-	  <td>
-	    <div class="nextButton" to="danke">
-	      Ich bin
-	      <br/>
-	      einverstanden.
-	    </div>
-	  </td>
-	</tr>
-      </table>
+      <div class="backButton">Zurück</div>
+      <div class="text">
+	Wir buchen <span name="betrag" type="input">?</span>€ 
+	für <span name="zweck" type="select">?</span> von Deinem
+	Konto ab.
+      </div>
+      <div class="text">
+	<input type="checkbox"/>
+	Spendenbescheinigung
+      </div>
+      <div class="nextButton" to="danke">
+	Ich bin
+	<br/>
+	einverstanden.
+      </div>
     </div>
     <div class="page" id="danke">
-      <p style="margin: 2em">
-	Danke für deine Spende!
-      </p>
+      <div class="text">
+	Danke für Deine Spende!
+      </div>
+      <div class="nextButton" to="page1">
+	Zurück
+	<br/>
+	zum
+	<br/>
+	Start
+      </div>
     </div>
     <div class="page" id="ueberweisen">
-      <table>
-	<tr>
-	  <td><img src="back.png" class="backButton"/></td>
-	  <td>
-	    Bitte gib deine Email Adresse ein:
-	    <br/>
-	    <input name="email" size="35"/>
-	  </td>
-	  <td>
-	    <div class="nextButton" to="ueberweisen2">
-	      Weiter
-	    </div>
-	  </td>
-	</tr>
-      </table>
+      <div class="backButton">Zurück</div>
+      <div class="text">
+	Mitgliedsnummer:<br/>
+	<input name="mitgliedsnummer" size="18"/>
+	<div style="margin:0.5em; text-align:center">
+	  oder
+	</div>
+	Email Adresse:<br/>
+	<input name="email" size="18"/>
+      </div>
+      <div class="nextButton" to="ueberweisen2">
+	Weiter
+      </div>
     </div>
     <div class="page" id="ueberweisen2" init="initCode">
-      <table>
-	<tr>
-	  <td rowspan="3"><img src="back.png" class="backButton"/></td>
-	  <td>
-	    Bitte richte deine Überweisung an:
-	  </td>
-	</tr>
-	<tr>
-	  <td>
-	    <p>
-	      Piratenpartei Deutschland
-	      <br/>
-	      Konto: 123456
-	      <br/>
-	      BLZ: 12355
-	    </p>
-	  </td>
-	  <td>
-	    Überweisungszweck:
-	    <p>
-	      <span type="code"></span>, &lt;Deine Mitgliedsnummer&gt;
-	    </p>
-	  </td>
-	</tr>
-      </table>
+      <div class="text">
+	<span style="font-size:12px">Danke für Deine Spende. Folgende Infos erhältst Du per Email:</span>
+	<p/>
+	Begünstigter: PirateStarter<br/>
+	Konto: 27 26 42 17<br/>
+	BLZ: 702 501 50 <span style="font-size:12px">(KSK MSE)</span>
+      </div>
+      <div class="text">
+	Betrag: <span name="betrag" type="input">?</span>€<br/>
+	Zweck: TOKEN<br/>
+	<span style="font-size:12px">(Dieser Token dient Dir zur Verfolgung der Spende)</span>
+      </div>
+      <div class="nextButton" to="page1">
+	Zurück
+	zum
+	Start
+      </div>
+
     </div>
   </body>
 </html>

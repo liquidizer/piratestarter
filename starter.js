@@ -1,9 +1,20 @@
 pshistory=[];
 
 $(function() {
-    var urlParamZweck= location.search.match('[?&]zweck=([^&]*)');
+    if (window.innerWidth>500) 
+	$('body').addClass('wide').removeClass('high');
+
+    var urlParamZweck= location.search.match('[?&]zwecke=([^&]*)');
     if (urlParamZweck) {
-	$('#zweck').val(urlParamZweck[1]);
+	console.log(urlParamZweck[1]);
+	var zwecke= decodeURI(urlParamZweck[1]).split(",");
+	zwecke.forEach(function (zweck) {
+	    $('#zweck').append("<option value='"+zweck+"'>"+zweck+"</option>");
+	});
+	$('#zweck').val(zwecke[0]);
+    } else {
+	$('#zweck').hide()
+	$('#zweck').after("Wahlkampf Bayern");
     }
     var urlParamBetrag= location.search.match('[?&]betrag=([^&]*)');
     if (urlParamBetrag) {
@@ -27,8 +38,8 @@ function showPage(pageid, dir1, dir2) {
 	mypage.show();
     }
     else {
-	$(".page:visible").hide("slide", {direction: dir1}, 500);
-	mypage.show("slide", {direction: dir2}, 600)
+	$(".page:visible").hide("slide", {direction: dir1}, 1);//500
+	mypage.show("slide", {direction: dir2}, 1);//600
     }
     $(':focus').blur();
     initPage(mypage);
@@ -38,7 +49,7 @@ function initPage(mypage) {
     mypage.find("span").each(function() {
        var name=$(this).attr("name");
        var type=$(this).attr("type");
-       var value="";
+       var value=0;
        if (type=="select") {
 	   value= $("select[name="+name+"] option").filter(":selected").text();
        } 
@@ -47,11 +58,12 @@ function initPage(mypage) {
        }
        else if (type=="code") {
 	   value="XY78";
-       }
-       $(this).text(value);
+       } 
+	if (value!==0)
+	    $(this).text(value);
     });
 }
 
 function betragMehr(factor) {
-    $('#betrag').val((parseFloat($('#betrag').val())*factor).toFixed(2));
+    $('#betrag').val((parseFloat($('#betrag').val())*factor).toFixed(0));
 }
