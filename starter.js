@@ -6,7 +6,6 @@ $(function() {
 
     var urlParamZweck= location.search.match('[?&]zwecke=([^&]*)');
     if (urlParamZweck) {
-	console.log(urlParamZweck[1]);
 	var zwecke= decodeURI(urlParamZweck[1]).split(",");
 	zwecke.forEach(function (zweck) {
 	    $('#zweck').append("<option value='"+zweck+"'>"+zweck+"</option>");
@@ -28,6 +27,8 @@ $(function() {
 	pshistory.pop();
 	showPage(pshistory.pop(), "right", "left");
     });
+    $('body').keyup(validatePage);
+    $('body').click(validatePage);
 });
 
 function showPage(pageid, dir1, dir2) {
@@ -38,11 +39,14 @@ function showPage(pageid, dir1, dir2) {
 	mypage.show();
     }
     else {
-	$(".page:visible").hide("slide", {direction: dir1}, 1);//500
-	mypage.show("slide", {direction: dir2}, 1);//600
+	$(".page:visible").hide("slide", {direction: dir1}, 5);
+	mypage.show("slide", {direction: dir2}, 6);
     }
     $(':focus').blur();
     initPage(mypage);
+    if (window['init_'+pageid]) {
+	window['init_'+pageid]();
+    }
  }
 
 function initPage(mypage) {
@@ -64,6 +68,22 @@ function initPage(mypage) {
     });
 }
 
+function validatePage() {
+    var pageid= $('.page:visible').attr('id');
+    var valid= true;
+    $('#'+pageid+' input[data-required]').each(function (i,elt) {
+	valid= valid && ($(elt).val()!="")
+    });
+    $('#'+pageid).toggleClass("valid", valid);
+    $('#'+pageid).toggleClass("invalid", !valid);
+}
+
 function betragMehr(factor) {
     $('#betrag').val((parseFloat($('#betrag').val())*factor).toFixed(0));
+}
+
+function init_lastschrift2() {
+    var spender= $('#spender');
+    if (spender.val()=="")
+	spender.val($('#inhaber').val());
 }

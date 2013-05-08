@@ -32,7 +32,8 @@
       <div class="backButton">Zurück</div>
       <div class="text">
 	Betrag:
-	<input name="betrag" id="betrag" value="25" size="6" style="text-align: right"/>€
+	<input name="betrag" id="betrag" value="25"
+	       size="6" style="text-align: right" data-required/>€
 	<br/>
 	<input type="button" value="weniger" onclick="betragMehr(.5)"/>
 	<input type="button" value="mehr" onclick="betragMehr(2)" style="float:right"/>
@@ -62,15 +63,15 @@
 	Überweisung
       </div>
     </div>
-    <div class="page" id="lastschrift">
+    <div class="page invalid" id="lastschrift">
       <div class="backButton">Zurück</div>
       <div class="text">
 	Kontoinhaber:<br/>
-	<input name="kontoinhaber" size="18"/><br/>
+	<input id="inhaber" name="kontoinhaber" size="18" data-required/><br/>
 	Konto:<br/>
-	<input name="konto" size="18"/><br/>
-	BLZ:<brl>
-	<input name="blz" size="18"/><br/>
+	<input name="konto" size="18" data-required/><br/>
+	BLZ:<br/>
+	<input name="blz" size="18" data-required/><br/>
       </div>
       <div class="nextButton" to="lastschrift2">
 	Weiter
@@ -85,7 +86,7 @@
       </div>
       <div class="text">
 	Spendername:<br/>
-	<input name="spender"/>
+	<input id="spender" name="spender"/>
       </div>
       <div class="nextButton" to="lastschrift3">
 	Weiter
