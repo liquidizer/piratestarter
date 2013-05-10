@@ -1,4 +1,5 @@
 var http = require('http');
+var spawn= require('child_process').spawn;
 var fs = require('fs');
 var url= require('url');
 
@@ -38,7 +39,7 @@ http.createServer(function(req, res) {
     }
     else if (req.url.match(/^\/completeDonation\/.*/)) {
 	var request= req.url.match(/^\/completeDonation\/(.*)/)[1];
-	saveFile("donation_"+generateCode(10), request, function(err) {
+	saveEncryptedFile("donation_"+generateCode(10), request, function(err) {
 	    if (err) {denyAccess(res, "Error"); }
 	    else { 
 		res.end('OK');
@@ -75,9 +76,10 @@ function denyAccess(res, message) {
     res.end(message);
 }
 
-function saveFile(filename, data, callback) {
-    console.log(data);
-    fs.writeFile(filename, data+'\n', callback);
+function saveEncryptedFile(filename, data, callback) {
+    encrypt(data, function(crypt) {
+	    fs.writeFile(filename, crypt, callback);
+	});
 }
 
 function log(message) {
@@ -96,3 +98,12 @@ function timeStamp() {
 	now.getMinutes()+':'+
 	now.getSeconds();
 };
+
+function encrypt(data, callback) {
+    var crypt= '';
+    var gpg= spawn('gpg', ['-a','-e','-r','piratestarter']);
+    gpg.stdout.on('data', function(data) { crypt+=data.toString();  });
+    gpg.on('exit', function() { callback(crypt); });
+    gpg.stdin.write(data);
+    gpg.stdin.end();
+}
