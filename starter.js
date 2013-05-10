@@ -1,9 +1,15 @@
-pshistory=[];
+var pshistory=[];
+var token= undefined;
+var myid= undefined;
 
 $(function() {
     if (window.innerWidth>500) 
 	$('body').addClass('wide').removeClass('high');
 
+    var urlId= location.search.match('[?&]myid=([^&]*)');
+    if (urlId) {
+	myid= urlId[1];
+    }
     var urlParamZweck= location.search.match('[?&]zwecke=([^&]*)');
     if (urlParamZweck) {
 	var zwecke= decodeURI(urlParamZweck[1]).split(",");
@@ -60,8 +66,8 @@ function initPage(mypage) {
        else if (type=="input") {
 	   value= $("input[name="+name+"]").val();
        }
-       else if (type=="code") {
-	   value="XY78";
+       else if (type=="token") {
+	   value= token;
        } 
 	if (value!==0)
 	    $(this).text(value);
@@ -82,8 +88,43 @@ function betragMehr(factor) {
     $('#betrag').val((parseFloat($('#betrag').val())*factor).toFixed(0));
 }
 
+function init_page1() {
+    token= undefined;
+}
+
+function init_page2() {
+    if (!token)
+	$.get('/createToken?myid='+myid, function(msg) { token= msg; });
+}
+
 function init_lastschrift2() {
     var spender= $('#spender');
     if (spender.val()=="")
 	spender.val($('#inhaber').val());
+}
+
+function init_lastschrift_danke() {
+    $.get('/completeDonation/createLastschrift?token='+token +
+	  '&name='+encodeURI($('#spender').val()) +
+	  '&mnr='+encodeURI($('#ls_mid').val()) +
+	  '&betrag='+encodeURI($('#betrag').val()), 
+	  '&inhaber='+encodeURI($('#inhaber').val()) +
+	  '&kto='+encodeURI($('#konto').val()) +
+	  '&blz='+encodeURI($('#blz').val()) +
+	  '&zweck='+encodeURI($('#zweck').val()) +
+	  '&bescheinigung='+encodeURI($('#ls_quittung').val()), 
+	  function(response) {
+	      if (response!="OK") alert('Fehlgeschlagen');
+	  });
+}
+
+function init_ueberweisen2() {
+    $.get('/completeDonation/createUeberweisung?token='+token +
+	  '&mnr='+encodeURI($('#uw_mid').val()) +
+	  '&mail='+encodeURI($('#uw_email').val()) +
+	  '&zweck='+encodeURI($('#zweck').val()) +
+	  '&betrag='+encodeURI($('#betrag').val()), 
+	  function(response) {
+	      if (response!="OK") alert('Fehlgeschlagen');
+	  });
 }

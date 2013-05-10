@@ -18,11 +18,12 @@
       <div class="text">
 	Bisher eingegange Spenden:
 	<p style="text-align:center; font-weight:bold; font-size:30px;">
-	  100€
+	  330€
 	</p>
       </div>
       <div class="text">
-	Offene Zusagen: 999€
+	<!-- Offene Zusagen: ---€ -->
+	Stand: 10.5.2013
       </div>
       <div class="nextButton" to="page2">
 	Jetzt<br/>spenden!
@@ -69,9 +70,9 @@
 	Kontoinhaber:<br/>
 	<input id="inhaber" name="kontoinhaber" size="18" data-required/><br/>
 	Konto:<br/>
-	<input name="konto" size="18" data-required/><br/>
+	<input id="konto" name="konto" size="18" data-required/><br/>
 	BLZ:<br/>
-	<input name="blz" size="18" data-required/><br/>
+	<input id="blz" name="blz" size="18" data-required/><br/>
       </div>
       <div class="nextButton" to="lastschrift2">
 	Weiter
@@ -82,7 +83,7 @@
       <div class="text">
 	Mitgliedsnummer:<br/>
 	(falls zur Hand)<br/>
-	<input name="mitglied"/>
+	<input id="ls_mid" name="mitglied"/>
       </div>
       <div class="text">
 	Spendername:<br/>
@@ -100,16 +101,16 @@
 	Konto ab.
       </div>
       <div class="text">
-	<input type="checkbox"/>
+	<input id="ls_quittung" type="checkbox"/>
 	Spendenbescheinigung
       </div>
-      <div class="nextButton" to="danke">
+      <div class="nextButton" to="lastschrift_danke">
 	Ich bin
 	<br/>
 	einverstanden.
       </div>
     </div>
-    <div class="page" id="danke">
+    <div class="page" id="lastschrift_danke">
       <div class="text">
 	Danke für Deine Spende!
       </div>
@@ -125,36 +126,31 @@
       <div class="backButton">Zurück</div>
       <div class="text">
 	Mitgliedsnummer:<br/>
-	<input name="mitgliedsnummer" size="18"/>
+	<input id="uw_mid" name="mitgliedsnummer" size="18"/>
 	<div style="margin:0.5em; text-align:center">
 	  oder
 	</div>
 	Email Adresse:<br/>
-	<input name="email" size="18"/>
+	<input id="uw_email" name="email" size="18"/>
       </div>
       <div class="nextButton" to="ueberweisen2">
 	Weiter
       </div>
     </div>
     <div class="page" id="ueberweisen2" init="initCode">
+      <div class="backButton">Zurück</div>
       <div class="text">
-	<span style="font-size:12px">Danke für Deine Spende. Folgende Infos erhältst Du per Email:</span>
+	<span class="small">Danke für Deine Spende. Folgende Infos erhältst Du per Email:</span>
 	<p/>
 	Begünstigter: PirateStarter<br/>
 	Konto: 27 26 42 17<br/>
-	BLZ: 702 501 50 <span style="font-size:12px">(KSK MSE)</span>
+	BLZ: 702 501 50 <span class="small">(KSK MSE)</span>
       </div>
       <div class="text">
 	Betrag: <span name="betrag" type="input">?</span>€<br/>
-	Zweck: TOKEN<br/>
-	<span style="font-size:12px">(Dieser Token dient Dir zur Verfolgung der Spende)</span>
+	Zweck: <span type="token">TOKEN</span><br/>
+	<span class="small">(Dieser Token dient Dir zur Verfolgung der Spende)</span>
       </div>
-      <div class="nextButton" to="page1">
-	Zurück
-	zum
-	Start
-      </div>
-
     </div>
   </body>
 </html>

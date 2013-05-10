@@ -21,6 +21,10 @@ a {
     color: white;
 }
 
+.small {
+    font-size:12px;
+}
+
 div.nextButton {
     text-align: center;
     border-radius: 5px;
