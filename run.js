@@ -1,10 +1,25 @@
 var http = require('http');
+var https = require('https');
 var spawn= require('child_process').spawn;
 var fs = require('fs');
 var url= require('url');
 
 // Check port number
-var port = process.env.PORT || 8888;
+var httpPort = 8888;
+var httpsPort = 8889;
+var keyFile = 'key.pem';
+var certFile = 'cert.pem';
+
+http.createServer(handleRequest).listen(httpPort);
+fs.stat(keyFile, function(noSecure) {
+    if (!noSecure) {
+	var secureOptions = {
+	    key : fs.readFileSync(keyFile),
+	    cert : fs.readFileSync(certFile)
+	};
+	https.createServer(secureOptions, handleRequest).listen(httpsPort);
+    }
+});
 
 // mime types
 var mimes= {
@@ -27,7 +42,7 @@ function generateCode(len) {
 }
 
 // Run web server
-http.createServer(function(req, res) {
+function handleRequest(req, res) {
 
     // check code if provided
     var urlParts= url.parse(req.url, true);
@@ -39,7 +54,7 @@ http.createServer(function(req, res) {
     }
     else if (req.url.match(/^\/completeDonation\/.*/)) {
 	var request= req.url.match(/^\/completeDonation\/(.*)/)[1];
-	saveEncryptedFile("donation_"+generateCode(10), request, function(err) {
+	saveEncryptedFile("donation_"+generateCode(10), timeStamp()+' '+request, function(err) {
 	    if (err) {denyAccess(res, "Error"); }
 	    else { 
 		res.end('OK');
@@ -51,7 +66,7 @@ http.createServer(function(req, res) {
 	var filename= urlParts.pathname.replace(/^\//,'') || "test.html";
 	serveFile(res, filename);
     }
-}).listen(port);
+}
 
 function serveFile(res, filename) {
     var mime= mimes[filename.replace(/[^.]*\./g,'')];
