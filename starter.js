@@ -3,8 +3,10 @@ var token= undefined;
 var myid= undefined;
 
 $(function() {
-    if (window.innerWidth>500) 
+   if (window.innerWidth>500) {
 	$('body').addClass('wide').removeClass('high');
+	$('.ifhigh').remove();
+   }
 
     var urlId= location.search.match('[?&]myid=([^&]*)');
     if (urlId) {
@@ -47,8 +49,8 @@ function showPage(pageid, dir1, dir2) {
 	mypage.show();
     }
     else {
-	$(".page:visible").hide("slide", {direction: dir1}, 5);
-	mypage.show("slide", {direction: dir2}, 6);
+	$(".page:visible").hide("slide", {direction: dir1}, 300);
+	mypage.show("slide", {direction: dir2}, 400);
     }
     $(':focus').blur();
     initPage(mypage);
