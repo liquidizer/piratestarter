@@ -131,7 +131,8 @@ function init_ueberweisen_danke() {
 	  '&zweck='+encodeURI($('#zweck').val()) +
 	  '&betrag='+encodeURI($('#betrag').val()) +
 	  '&name='+encodeURI($('#uw_spender').val()) +
-	  '&adresse='+encodeURI($('#uw_adresse').val()),
+	  '&adresse='+encodeURI($('#uw_adresse').val()) +
+	  '&bescheinigung'+encodeURI($('#uw_quittung').val()),
 	  function(response) {
 	      if (response!="OK") alert('Fehlgeschlagen');
 	  });
