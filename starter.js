@@ -27,14 +27,16 @@ $(function() {
     }
     showPage("page1", "init");
     $('.nextButton').click(function(evt) { 
-	showPage($(evt.target).attr('to'), "left", "right"); 
+	var to= $(evt.target).attr('to');
+	if (to.match(/\(\)$/)) to= eval(to);
+	showPage(to, "left", "right"); 
     });
     $('.backButton').click(function() {
 	pshistory.pop();
 	showPage(pshistory.pop(), "right", "left");
     });
-    $('body').keyup(validatePage);
-    $('body').click(validatePage);
+    $('html').keyup(validatePage);
+    $('html').click(validatePage);
 });
 
 function showPage(pageid, dir1, dir2) {
@@ -77,7 +79,7 @@ function initPage(mypage) {
 function validatePage() {
     var pageid= $('.page:visible').attr('id');
     var valid= true;
-    $('#'+pageid+' input[data-required]').each(function (i,elt) {
+    $('#'+pageid+' *[data-required]').each(function (i,elt) {
 	valid= valid && ($(elt).val()!="")
     });
     $('#'+pageid).toggleClass("valid", valid);
@@ -103,6 +105,10 @@ function init_lastschrift2() {
 	spender.val($('#inhaber').val());
 }
 
+function ueberweisen2or3() {
+    return $('#uw_mid').val()!="" ? "ueberweisen_danke" : "ueberweisen2";
+}
+
 function init_lastschrift_danke() {
     $.get('/completeDonation/createLastschrift?token='+token +
 	  '&name='+encodeURI($('#spender').val()) +
@@ -118,12 +124,14 @@ function init_lastschrift_danke() {
 	  });
 }
 
-function init_ueberweisen2() {
+function init_ueberweisen_danke() {
     $.get('/completeDonation/createUeberweisung?token='+token +
 	  '&mnr='+encodeURI($('#uw_mid').val()) +
 	  '&mail='+encodeURI($('#uw_email').val()) +
 	  '&zweck='+encodeURI($('#zweck').val()) +
-	  '&betrag='+encodeURI($('#betrag').val()), 
+	  '&betrag='+encodeURI($('#betrag').val()) +
+	  '&name='+encodeURI($('#uw_spender').val()) +
+	  '&adresse='+encodeURI($('#uw_adresse').val()),
 	  function(response) {
 	      if (response!="OK") alert('Fehlgeschlagen');
 	  });

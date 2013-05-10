@@ -34,8 +34,8 @@
       <div class="text">
 	Betrag:
 	<input name="betrag" id="betrag" value="25"
-	       size="6" style="text-align: right" data-required/>€
-	<br/>
+	       size="8" style="text-align: right" data-required/>€
+	<p/>
 	<input type="button" value="weniger" onclick="betragMehr(.5)"/>
 	<input type="button" value="mehr" onclick="betragMehr(2)" style="float:right"/>
       </div>
@@ -133,11 +133,27 @@
 	Email Adresse:<br/>
 	<input id="uw_email" name="email" size="18"/>
       </div>
-      <div class="nextButton" to="ueberweisen2">
+      <div class="nextButton" to="ueberweisen2or3()">
 	Weiter
       </div>
     </div>
-    <div class="page" id="ueberweisen2" init="initCode">
+    <div class="page invalid" id="ueberweisen2" init="initCode">
+      <div class="backButton">Zurück</div>
+      <div class="text">
+	Name des Spenders:<br/>
+	<input id="uw_spender" name="spender" size="18" data-required/>
+	<p/>
+	Adresse:<br/>
+	<textarea id="uw_adresse" name="adresse" cols="15" rows="2" data-required></textarea>
+	<p/>
+	<input id="ls_quittung" type="checkbox"/>
+	Spendenbescheinigung
+      </div>
+      <div class="nextButton" to="ueberweisen_danke">
+	Weiter
+      </div>
+    </div>
+    <div class="page" id="ueberweisen_danke" init="initCode">
       <div class="backButton">Zurück</div>
       <div class="text">
 	<span class="small">Danke für Deine Spende. Folgende Infos erhältst Du per Email:</span>
