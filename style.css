@@ -24,6 +24,11 @@ a {
 .small {
     font-size:12px;
 }
+p.bold {
+    text-align:center; 
+    font-weight:bold; 
+    font-size:30px;
+}
 
 div.nextButton {
     text-align: center;

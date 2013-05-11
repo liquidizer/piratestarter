@@ -47,7 +47,7 @@ function handleRequest(req, res) {
     // check code if provided
     var urlParts= url.parse(req.url, true);
     if (urlParts.pathname=="/createToken") {
-	var token = generateCode(8);
+	var token = generateCode(6);
 	res.writeHead(200, { 'Content-Type': 'text/plain' });
 	res.end(token);
 	log('createToken '+ token +' '+ urlParts.query.myid);
