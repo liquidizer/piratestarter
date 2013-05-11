@@ -30,7 +30,7 @@
       </div>
     </div>
     <div id="page2" class="page">
-      <div class="backButton">Zurück</div>
+      <div class="backButton"></div>
       <div class="text">
 	Betrag:
 	<input name="betrag" id="betrag" value="25"
@@ -52,7 +52,7 @@
       </div>
     </div>
     <div class="page" id="page3">
-      <div class="backButton">Zurück</div>
+      <div class="backButton"></div>
       <div class="nextButton" to="lastschrift">
 	Bezahlung per
 	<br>
@@ -65,42 +65,43 @@
       </div>
     </div>
     <div class="page invalid" id="lastschrift">
-      <div class="backButton">Zurück</div>
+      <div class="backButton"></div>
       <div class="text">
-	Kontoinhaber:<br class="ifhigh"/>
-	<input id="inhaber" name="kontoinhaber" size="18" data-required/><br/>
-	Konto:<br class="ifhigh"/>
-	<input id="konto" name="konto" size="18" data-required/><br/>
-	BLZ:<br class="ifhigh"/>
-	<input id="blz" name="blz" size="18" data-required/><br/>
+	<div class="kontotext">Kontoinhaber:</div>
+	<input id="inhaber" name="kontoinhaber" class="px" data-required/><br/>
+	<div class="kontotext">Konto:</div>
+	<input id="konto" name="konto" class="px" data-required/><br/>
+	<div class="kontotext">BLZ:</div>
+	<input id="blz" name="blz" class="px" data-required/><br/>
       </div>
       <div class="nextButton" to="lastschrift2">
 	Weiter
       </div>
     </div>
     <div class="page" id="lastschrift2">
-      <div class="backButton">Zurück</div>
+      <div class="backButton"></div>
       <div class="text">
 	Mitgliedsnummer:<br/>
 	(falls zur Hand)<br/>
-	<input id="ls_mid" name="mitglied"/>
+	<input id="ls_mid" name="mitglied" class="px"/>
       </div>
       <div class="text">
 	Spendername:<br/>
-	<input id="spender" name="spender"/>
+	<p class="ifwide"></p>
+	<input id="spender" name="spender" class="px"/>
       </div>
       <div class="nextButton" to="lastschrift3">
 	Weiter
       </div>
     </div>
     <div class="page" id="lastschrift3">
-      <div class="backButton">Zurück</div>
+      <div class="backButton"></div>
       <div class="text">
 	Wir buchen <span name="betrag" type="input">?</span>€ 
-	für <span name="zweck" type="select">?</span> von Deinem
-	Konto ab.
-      </div>
-      <div class="text">
+	für <span name="zweck" type="select">?</span> 
+	<br class="ifwide">
+	von Deinem Konto ab.
+	<p/>
 	<input id="ls_quittung" type="checkbox"/>
 	Spendenbescheinigung
       </div>
@@ -118,7 +119,8 @@
 	</p>
       </div>
       <div class="text">
-	Dieser Token dient Dir zur Verfolgung der Spende.
+	Dieser Token dient Dir<br class="ifwide"/>
+	zur Verfolgung der Spende.
       </div>
       <div class="nextButton" to="page1">
 	Zurück
@@ -129,29 +131,32 @@
       </div>
     </div>
     <div class="page" id="ueberweisen">
-      <div class="backButton">Zurück</div>
+      <div class="backButton"></div>
       <div class="text">
-	Mitgliedsnummer:<br/>
-	<input id="uw_mid" name="mitgliedsnummer" size="18"/>
-	<div style="margin:0.5em; text-align:center">
+	<div class="kontotext">Mitgliedsnummer:</div>
+	<input id="uw_mid" name="mitgliedsnummer" class="px"/>
+	<div style="margin:0.5em; text-align:center" class="ifhigh">
 	  oder
 	</div>
-	Email Adresse:<br/>
-	<input id="uw_email" name="email" size="18"/>
+	<br/>
+	<div class="kontotext">Email Adresse:</div>
+	<input id="uw_email" name="email" class="px"/>
       </div>
       <div class="nextButton" to="ueberweisen2or3()">
 	Weiter
       </div>
     </div>
     <div class="page invalid" id="ueberweisen2" init="initCode">
-      <div class="backButton">Zurück</div>
+      <div class="backButton"></div>
       <div class="text">
 	Name des Spenders:<br/>
-	<input id="uw_spender" name="spender" size="18" data-required/>
-	<p/>
+	<input id="uw_spender" name="spender" class="px" data-required/>
+      </div>
+      <div class="text">
 	Adresse:<br/>
-	<textarea id="uw_adresse" name="adresse" cols="15" rows="2" data-required></textarea>
-	<p/>
+	<textarea id="uw_adresse" name="adresse" class="px" cols="15" rows="2" data-required></textarea>
+	<p class="ifhigh"></p>
+	<br class="ifwide"/>
 	<input id="ls_quittung" type="checkbox"/>
 	Spendenbescheinigung
       </div>
@@ -160,10 +165,15 @@
       </div>
     </div>
     <div class="page" id="ueberweisen_danke" init="initCode">
-      <div class="backButton">Zurück</div>
+      <div class="backButton"></div>
       <div class="text">
-	<span class="small">Danke für Deine Spende. Folgende Infos erhältst Du per Email:</span>
-	<p/>
+	<span class="small">
+	  Danke für Deine Spende. 
+	  <br class="ifwide"/>
+	  Folgende Infos erhältst Du per Email:
+	</span>
+	<p class="ifhigh"></p>
+	<br class="ifwide"/>
 	Begünstigter: PirateStarter<br/>
 	Konto: 27 26 42 17<br/>
 	BLZ: 702 501 50 <span class="small">(KSK MSE)</span>
@@ -171,10 +181,15 @@
       <div class="text">
 	Betrag: <span name="betrag" type="input">?</span>€<br/>
 	Zweck: <span type="token">TOKEN</span><br/>
-	<span class="small">(Dieser Token dient Dir zur Verfolgung der Spende)</span>
+	<span class="small">
+	  (Dieser Token dient Dir<br class="ifwide"/>
+	  zur Verfolgung der Spende)
+	</span>
       </div>
       <div class="nextButton" to="page1">
-	Zurück zum Start
+	Zurück zum
+	<br class="ifwide"/>
+	Start
       </div>
     </div>
   </body>

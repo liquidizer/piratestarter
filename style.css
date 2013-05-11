@@ -15,7 +15,9 @@ input, select, td, textarea {
     font-size: 19px;
     padding: 4px;
 }
-
+input.px {
+    width: 220px;
+}
 a {
     text-decoration: none;
     color: white;
@@ -54,18 +56,6 @@ div.nextButton:hover {
 }
 
 .backButton:hover {
-    background-color: lightgray;
-}
-
-.wide .backButton {
-max-width:20px;
-position:relative;
-top:40px;
--webkit-transform: rotate(-90deg);
--moz-transform: rotate(-90deg);
--ms-transform: rotate(-90deg);
--o-transform: rotate(-90deg);
-filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
 }
 
 .page {
@@ -77,10 +67,21 @@ filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
     margin: 0.8em;
 }
 
-.wide .page div {
+.wide .page > div {
     display: table;
     float: left;
     margin: 0.5em;
+}
+
+.wide .page div.text {
+    max-width:400px;
+    height: 150px;
+}
+
+.wide div.kontotext {
+    display: table;
+    float: left;
+    width: 150px;
 }
 
 #header {

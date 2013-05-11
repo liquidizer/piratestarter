@@ -98,20 +98,23 @@ function saveEncryptedFile(filename, data, callback) {
 }
 
 function log(message) {
-    var logMessage= timeStamp()+': '+message;
+    var logMessage= timeStamp()+' '+message;
     var stream= fs.createWriteStream('log.txt', {flags: 'a', encoding:'utf-8'});
     stream.end(logMessage+'\n');
     console.log(logMessage);
 }
 
 function timeStamp() {
+    var pad= function(x) {
+	return x<10 ? '0'+x : ''+x;
+    };
     var now= new Date();
     return now.getFullYear()+'-'+
-	(now.getMonth()+1)+'-'+
-	now.getDate()+'T'+
-	now.getHours()+':'+
-	now.getMinutes()+':'+
-	now.getSeconds();
+	pad(now.getMonth()+1)+'-'+
+	pad(now.getDate())+'T'+
+	pad(now.getHours())+':'+
+	pad(now.getMinutes())+':'+
+	pad(now.getSeconds());
 };
 
 function encrypt(data, callback) {

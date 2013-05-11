@@ -6,6 +6,10 @@ $(function() {
    if (window.innerWidth>500) {
 	$('body').addClass('wide').removeClass('high');
 	$('.ifhigh').remove();
+	$('.backButton').append('<img src="back-wide.png"/>');
+   } else {
+       $('.ifwide').remove();
+	$('.backButton').append('<img src="back-high.png"/>');
    }
 
     var urlId= location.search.match('[?&]myid=([^&]*)');
