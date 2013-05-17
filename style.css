@@ -18,6 +18,9 @@ input, select, td, textarea {
 input.px {
     width: 220px;
 }
+input.px2 {
+    width: 180px;
+}
 a {
     text-decoration: none;
     color: white;
@@ -56,6 +59,7 @@ div.nextButton:hover {
 }
 
 .backButton:hover {
+    background-color: lightgray;
 }
 
 .page {
@@ -81,7 +85,13 @@ div.nextButton:hover {
 .wide div.kontotext {
     display: table;
     float: left;
-    width: 150px;
+    width: 170px;
+}
+
+.wide div.ls_quittung {
+    position: absolute;
+    left: 55px;
+    top: 90px;
 }
 
 #header {

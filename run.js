@@ -1,25 +1,10 @@
 var http = require('http');
-var https = require('https');
 var spawn= require('child_process').spawn;
 var fs = require('fs');
 var url= require('url');
 
-// Check port number
-var httpPort = 8888;
-var httpsPort = 8889;
-var keyFile = 'key.pem';
-var certFile = 'cert.pem';
-
-http.createServer(handleRequest).listen(httpPort);
-fs.stat(keyFile, function(noSecure) {
-    if (!noSecure) {
-	var secureOptions = {
-	    key : fs.readFileSync(keyFile),
-	    cert : fs.readFileSync(certFile)
-	};
-	https.createServer(secureOptions, handleRequest).listen(httpsPort);
-    }
-});
+var server= http.createServer(handleRequest);
+server.listen(8888);//, '78.46.227.175');
 
 // mime types
 var mimes= {

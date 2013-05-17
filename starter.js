@@ -9,7 +9,7 @@ $(function() {
 	$('.backButton').append('<img src="back-wide.png"/>');
    } else {
        $('.ifwide').remove();
-	$('.backButton').append('<img src="back-high.png"/>');
+	$('.backButton').append('<img src="back-high.png"/> Zur&uuml;ck');
    }
 
     var urlId= location.search.match('[?&]myid=([^&]*)');

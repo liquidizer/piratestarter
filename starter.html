@@ -3,8 +3,8 @@
     <title>Pirate Starter</title>
     <meta charset="UTF-8"/>
     <link type="text/css" href="style.css" rel="stylesheet"/>
-    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
-    <script type="text/javascript" src="http://code.jquery.com/ui/jquery-ui-git.js"></script>
+    <script type="text/javascript" src="jquery-latest.min.js"></script>
+    <script type="text/javascript" src="jquery-ui-git.js"></script>
     <script type="text/javascript" src="starter.js"></script>
   </head>
   <body class="high">
@@ -12,7 +12,7 @@
       <a href="http://www.piratestarter.de" target="_blank">PirateStarter</a>
     </div>
     <div id="footer">
-      <a href="http://www.piratestarter.de" target="_blank">Homepage: www.piratestarter.de</a>
+      <a href="http://www.piratestarter.de" target="_blank">www.piratestarter.de</a>
     </div>
     <div id="page1" class="page">
       <div class="text">
@@ -83,7 +83,7 @@
       <div class="text">
 	Mitgliedsnummer:<br/>
 	(falls zur Hand)<br/>
-	<input id="ls_mid" name="mitglied" class="px"/>
+	<input id="ls_mid" name="mitglied" class="px2"/>
       </div>
       <div class="text">
 	Spendername:<br/>
@@ -138,7 +138,9 @@
 	<div style="margin:0.5em; text-align:center" class="ifhigh">
 	  oder
 	</div>
-	<br/>
+	<div style="margin:0" class="ifwide">
+	  oder
+	</div>
 	<div class="kontotext">Email Adresse:</div>
 	<input id="uw_email" name="email" class="px"/>
       </div>
@@ -155,10 +157,10 @@
       <div class="text">
 	Adresse:<br/>
 	<textarea id="uw_adresse" name="adresse" class="px" cols="15" rows="2" data-required></textarea>
-	<p class="ifhigh"></p>
-	<br class="ifwide"/>
-	<input id="ls_quittung" type="checkbox"/>
-	Spendenbescheinigung
+	<div class="ls_quittung">
+	  <input id="ls_quittung" type="checkbox"/>
+	  Spendenbescheinigung
+	</div>
       </div>
       <div class="nextButton" to="ueberweisen_danke">
 	Weiter
@@ -187,7 +189,9 @@
 	</span>
       </div>
       <div class="nextButton" to="page1">
-	Zurück zum
+	Zurück 
+	<br class="ifwide"/>
+	zum
 	<br class="ifwide"/>
 	Start
       </div>
