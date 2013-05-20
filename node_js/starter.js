@@ -2,15 +2,18 @@ var pshistory=[];
 var token= undefined;
 var myid= undefined;
 
+setTimeout("showPage('page2','left','right')", 500);
+
 $(function() {
-   if (window.innerWidth>500) {
-	$('body').addClass('wide').removeClass('high');
-	$('.ifhigh').remove();
-	$('.backButton').append('<img src="back-wide.png"/>');
-   } else {
-       $('.ifwide').remove();
-	$('.backButton').append('<img src="back-high.png"/> Zur&uuml;ck');
-   }
+    var width= window.innerWidth;
+    var height= window.innerHeight;
+    if (width > height) {
+       $('body').addClass('wide').removeClass('high');
+ 	$('.ifhigh').remove();
+    } else {
+        $('.ifwide').remove();
+    }
+    $('#background').attr('width',width).attr('height',height);   
 
     var urlId= location.search.match('[?&]myid=([^&]*)');
     if (urlId) {
@@ -46,6 +49,7 @@ $(function() {
 });
 
 function showPage(pageid, dir1, dir2) {
+    console.log('show',pageid);
     pshistory.push(pageid);
     var mypage= $("#"+pageid);
     if (dir1=="init") {
@@ -53,8 +57,8 @@ function showPage(pageid, dir1, dir2) {
 	mypage.show();
     }
     else {
-	$(".page:visible").hide("slide", {direction: dir1}, 300);
-	mypage.show("slide", {direction: dir2}, 400);
+	$(".page:visible").hide("slide", {direction: dir1}, 30);
+	mypage.show("slide", {direction: dir2}, 40);
     }
     $(':focus').blur();
     initPage(mypage);

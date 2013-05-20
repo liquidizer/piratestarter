@@ -30,58 +30,43 @@ a {
     font-size:12px;
 }
 p.bold {
-    text-align:center; 
+    margin: 1ex 0 1ex 0;
     font-weight:bold; 
     font-size:30px;
 }
 
-div.nextButton {
+/* DEPRECATED */
+.page div.nextButton {
     text-align: center;
-    border-radius: 5px;
+    border-radius: 10px;
     margin: 1em;
     padding: 0.5em;
     color: white;
-    background-color: orange;
+    background-color: black;
     font-weight: bold;
 }
 
-div.invalid div.nextButton {
+.page.invalid .nextButton {
     pointer-events: none;
     background-color: gray;
 }
 
-div.nextButton:hover {
-    background-color: red;
+.page div.nextButton:hover {
+    background-color: orange;
 }
+/* END DEPRECATED*/
 
-.backButton {
-    margin: 0 0.8em 0 0.8em;
-}
-
-.backButton:hover {
-    background-color: lightgray;
-}
-
-.page {
-    width: 98%;
-    position: absolute;
-}
-
-.high .page div.text {
-    margin: 0.8em;
+.page div {
+    margin: 0 1em 0 1em;
 }
 
 .wide .page > div {
     display: table;
     float: left;
-    margin: 0.5em;
+    margin: 0 0.5em 0 0.5em;
 }
 
-.wide .page div.text {
-    max-width:400px;
-    height: 150px;
-}
-
+/* FORM FORMAT */
 .wide div.kontotext {
     display: table;
     float: left;
@@ -94,24 +79,136 @@ div.nextButton:hover {
     top: 90px;
 }
 
-#header {
-    text-align: center;
-    padding: 6px;
-    background-color: black;
-    color: white;
-    font-weight: bold;
-    height: 25px;
+/* BACKGROUND IMAGE */
+#background {
+    position:absolute;
+    top: 0px;
+    left: 0px;
+    border: 0px;
+    z-index: -10;
 }
 
-#footer {
+/* HEADER */
+#header {
     text-align: center;
-    padding: 6px;
-    background-color: black;
-    color: white;
-    font-size: 16px;
+}
+#header .bar {
+    position: absolute;
+    height:43px;
+    width: 100%;
+    top: 17px;
+    background: black;
+}
+#header img {
+    position: relative;
+}
+.high #header img {
+    left: -77px;
+}
 
-    position:absolute;
-    bottom:0;
-    width:100%;
-    height:25px;
+/* BACK BUTTON */
+.wide .backButton {
+    width: 55px;
+    height: 129px;
+    border: 0px;
+    color: rgba(0,0,0,0);
+    background: url(img/zur.png);
+}
+.high .backButton {
+    width: 103px;
+    height: 55px;
+    border: 0px;
+    color: rgba(0,0,0,0);
+    background: url(img/zur_high.png);
+}
+.wide .backButton:hover {
+    background: url(img/zur_h.png);
+}
+.high .backButton:hover {
+    background: url(img/zur_h_high.png);
+}
+
+/* PAGE1: jetzt spenden */
+#jetztSpenden {
+    width: 226px;
+    height: 141px;
+    background: url(img/widget_spendenknopf_schwarz.png);
+    border: 0px;
+    color: rgba(0,0,0,0);
+}
+#jetztSpenden:hover {
+    background: url(img/widget_spendenknopf_orange.png);
+}
+.wide #jetztSpenden {
+    position: relative;
+    top: -15px;
+}
+.standDatum {
+    position: absolute;
+    bottom: 10px;
+    left:0;
+}
+.wide #page1 .text {
+    margin: 0 0 0 140px;
+}
+
+/* PAGE2: Betrag eingeben */
+#betragMehr, #betragWeniger {
+    width: 42px;
+    height: 45px;
+    border: 0px;
+    color: rgba(0,0,0,0);
+}
+#betragMehr {
+    background: url(img/up.png);
+}
+#betragMehr:hover {
+    background: url(img/up_h.png);
+}
+#betragWeniger {
+    background: url(img/down.png);
+}
+#betragWeniger:hover {
+    background: url(img/down_h.png);
+}
+#betrag {
+    text-align: right;
+    width: 100px;
+}
+#jetztBezahlen {
+    width: 212px;
+    height: 129px;
+    border: 0px;
+    color: rgba(0,0,0,0);
+    background: url(img/bez.png);
+}
+#jetztBezahlen:hover {
+    background: url(img/bez_h.png);
+}
+.wide #jetztBezahlen {
+    position: absolute;
+    top:80px;
+    left:450px;
+}
+
+/* PAGE3: Zahlungsart */
+#payUeberweisung {
+    width: 242px;
+    height: 129px;
+    border: 0px;
+    color: rgba(0,0,0,0);
+    background: url(img/weis.png);
+}
+#payUeberweisung:hover {
+    background: url(img/weis_h.png);
+}
+#payLastschrift {
+    width: 221px;
+    height: 129px;
+    border: 0px;
+    color: rgba(0,0,0,0);
+    background: url(img/last.png);
+}
+#payLastschrift:hover {
+    background: url(img/last_h.png);
 }

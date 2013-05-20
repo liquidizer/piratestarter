@@ -8,11 +8,10 @@
     <script type="text/javascript" src="starter.js"></script>
   </head>
   <body class="high">
+    <img id="background" src="img/bg.png"/>
     <div id="header">
-      <a href="http://www.piratestarter.de" target="_blank">PirateStarter</a>
-    </div>
-    <div id="footer">
-      <a href="http://www.piratestarter.de" target="_blank">www.piratestarter.de</a>
+      <div class="bar">&nbps;aoeu</div>
+      <img src="img/widget_kopfzeile.png"/>
     </div>
     <div id="page1" class="page">
       <div class="text">
@@ -20,52 +19,65 @@
 	<p class="bold">
 	  3.879,13€
 	</p>
+	<div class="standDatum">
+	  Stand: 15.5.2013
+	</div>
       </div>
-      <div class="text">
-	<!-- Offene Zusagen: ---€ -->
-	Stand: 15.5.2013
-      </div>
-      <div class="nextButton" to="page2">
-	Jetzt<br/>spenden!
-      </div>
+      <input type="button" class="nextButton" to="page2"
+	     id="jetztSpenden" value="jetzt spenden"/>
     </div>
     <div id="page2" class="page">
-      <div class="backButton"></div>
-      <div class="text">
-	Betrag:
-	<input name="betrag" id="betrag" value="25"
-	       size="8" style="text-align: right" data-required/>€
-	<p/>
-	<input type="button" value="weniger" onclick="betragMehr(.5)"/>
-	<input type="button" value="mehr" onclick="betragMehr(2)" style="float:right"/>
+      <div>
+	<input type="button" class="backButton" value="zurueck"/>
       </div>
       <div class="text">
-	Für:<br/>
-	<select name="zweck" id="zweck">
-	  <option value="wahlkampf">Wahlkampf Bayern</option>
-	</select>
+	<table>
+	  <tr>
+	    <td>Betrag:</td>
+	    <td><input name="betrag" id="betrag" value="25" data-required/></td>
+	    <td>€</td>
+	  </tr>
+	  <tr>
+	    <td/>
+	    <td>
+	    <input type="button" id="betragWeniger"
+		   value="weniger" onclick="betragMehr(.5)"/>
+	    <input type="button" id="betragMehr"
+		   value="mehr" onclick="betragMehr(2)"/>
+	    </td>
+	  </tr>
+	</table>
       </div>
-      <div class="nextButton" to="page3">
-	Weiter zur
-	<br/>
-	Bezahlung
+      <div class="text">
+	<table>
+	  <tr><td>Für:</td></tr>
+	  <tr><td>
+	      <select name="zweck" id="zweck">
+		<option value="wahlkampf">Wahlkampf Bayern</option>
+	      </select>
+	  </td></tr>
+	</table>
       </div>
+      <input type="button" class="nextButton" to="page3"
+	     id="jetztBezahlen" value="Weiter zur Bezahlung"/>
     </div>
     <div class="page" id="page3">
-      <div class="backButton"></div>
-      <div class="nextButton" to="lastschrift">
-	Bezahlung per
-	<br>
-	Lastschrift
+      <div>
+	<input type="button" class="backButton" value="zurueck"/>
       </div>
-      <div class="nextButton" to="ueberweisen">
-	Bezahlung per
-	<br>
-	Überweisung
+      <div class="text">
+	<input type="button" class="nextButton" to="ueberweisen"
+	       id="payUeberweisung" value="Bezahlen per Ueberweisung"/>
+      </div>
+      <div class="text">
+	<input type="button" class="nextButton" to="lastschrift"
+	       id="payLastschrift" value="Bezahlen per Lastschrift"/>
       </div>
     </div>
     <div class="page invalid" id="lastschrift">
-      <div class="backButton"></div>
+      <div>
+	<input type="button" class="backButton" value="zurueck"/>
+      </div>
       <div class="text">
 	<div class="kontotext">Kontoinhaber:</div>
 	<input id="inhaber" name="kontoinhaber" class="px" data-required/><br/>
@@ -79,7 +91,9 @@
       </div>
     </div>
     <div class="page" id="lastschrift2">
-      <div class="backButton"></div>
+      <div>
+	<input type="button" class="backButton" value="zurueck"/>
+      </div>
       <div class="text">
 	Mitgliedsnummer:<br/>
 	(falls zur Hand)<br/>
@@ -95,7 +109,9 @@
       </div>
     </div>
     <div class="page" id="lastschrift3">
-      <div class="backButton"></div>
+      <div>
+	<input type="button" class="backButton" value="zurueck"/>
+      </div>
       <div class="text">
 	Wir buchen <span name="betrag" type="input">?</span>€ 
 	für <span name="zweck" type="select">?</span> 
@@ -131,7 +147,9 @@
       </div>
     </div>
     <div class="page" id="ueberweisen">
-      <div class="backButton"></div>
+      <div>
+	<input type="button" class="backButton" value="zurueck"/>
+      </div>
       <div class="text">
 	<div class="kontotext">Mitgliedsnummer:</div>
 	<input id="uw_mid" name="mitgliedsnummer" class="px"/>
@@ -149,7 +167,9 @@
       </div>
     </div>
     <div class="page invalid" id="ueberweisen2" init="initCode">
-      <div class="backButton"></div>
+      <div>
+	<input type="button" class="backButton" value="zurueck"/>
+      </div>
       <div class="text">
 	Name des Spenders:<br/>
 	<input id="uw_spender" name="spender" class="px" data-required/>
@@ -167,7 +187,9 @@
       </div>
     </div>
     <div class="page" id="ueberweisen_danke" init="initCode">
-      <div class="backButton"></div>
+      <div>
+	<input type="button" class="backButton" value="zurueck"/>
+      </div>
       <div class="text">
 	<span class="small">
 	  Danke für Deine Spende. 
