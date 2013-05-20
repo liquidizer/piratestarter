@@ -1,3 +1,4 @@
+process.chdir("/var/www/piratestarter/node_js");
 var http = require('http');
 var spawn= require('child_process').spawn;
 var fs = require('fs');
