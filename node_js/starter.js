@@ -2,8 +2,6 @@ var pshistory=[];
 var token= undefined;
 var myid= undefined;
 
-//setTimeout("showPage('page2','left','right')", 500);
-
 $(function() {
     var width= window.innerWidth;
     var height= window.innerHeight;
@@ -49,12 +47,12 @@ $(function() {
 });
 
 function showPage(pageid, dir1, dir2) {
-    console.log('show',pageid);
     pshistory.push(pageid);
     var mypage= $("#"+pageid);
     if (dir1=="init") {
 	 $(".page").hide();
-	mypage.show();
+	$("#background").fadeIn(500);
+	mypage.fadeIn(500);
     }
     else {
 	$(".page:visible").hide("slide", {direction: dir1}, 300);

@@ -7,18 +7,26 @@
     <script type="text/javascript" src="jquery-latest.min.js"></script>
     <script type="text/javascript" src="jquery-ui-git.js"></script>
     <script type="text/javascript" src="starter.js"></script>
+    <style>
+      body {
+      background-color: black;
+      }
+      #background, .page {
+      display: none;
+      }
+    </style>
   </head>
   <body class="high">
     <img id="background" src="img/bg.png"/>
     <div id="header">
-      <div class="bar">&nbps;aoeu</div>
-      <img src="img/widget_kopfzeile.png"/>
+      <div class="bar">&nbps;</div>
+      <a href="http://piratestarter.de" target="_blank"><img src="img/widget_kopfzeile.png"/></a>
     </div>
     <div id="page1" class="page">
       <div class="text">
 	Bisher eingegangene Spenden:
 	<p class="bold">
-	  3.879,13€
+	  4.029,13€
 	</p>
 	<div class="standDatum">
 	  Stand: 15.5.2013
@@ -39,7 +47,7 @@
 	    <td>€</td>
 	  </tr>
 	  <tr>
-	    <td/>
+	    <td valign="bottom"><span class="ifhigh">Für:</span></td>
 	    <td>
 	    <input type="button" id="betragWeniger"
 		   value="weniger" onclick="betragMehr(.5)"/>
@@ -51,7 +59,7 @@
       </div>
       <div class="text">
 	<table>
-	  <tr><td>Für:</td></tr>
+	  <tr><td class="ifwide">Für:</td></tr>
 	  <tr><td>
 	      <select name="zweck" id="zweck">
 		<option value="wahlkampf">Wahlkampf Bayern</option>

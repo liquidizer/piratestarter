@@ -6,10 +6,6 @@ body {
     font-size: 19px;
  }
 
-table {
-    width: 100%;
-}
-
 input, select, td, textarea {
     font-size: 19px;
     padding: 4px;
@@ -37,7 +33,7 @@ p.bold {
 /* DEPRECATED */
 .page div.nextButton {
     text-align: center;
-    border-radius: 10px;
+    border: 2px solid white;
     margin: 1em;
     padding: 0.5em;
     color: white;
@@ -189,11 +185,15 @@ p.bold {
     top:80px;
     left:450px;
 }
+.high #jetztBezahlen {
+    position: relative;
+    left: 1em;
+}
 
 /* PAGE3: Zahlungsart */
 #payUeberweisung {
     width: 242px;
-    height: 129px;
+    height: 100px;
     border: 0px;
     color: rgba(0,0,0,0);
     background: url(img/weis.png);
@@ -203,7 +203,7 @@ p.bold {
 }
 #payLastschrift {
     width: 221px;
-    height: 129px;
+    height: 100px;
     border: 0px;
     color: rgba(0,0,0,0);
     background: url(img/last.png);
