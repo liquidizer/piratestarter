@@ -2,7 +2,7 @@ var pshistory=[];
 var token= undefined;
 var myid= undefined;
 
-setTimeout("showPage('page2','left','right')", 500);
+//setTimeout("showPage('page2','left','right')", 500);
 
 $(function() {
     var width= window.innerWidth;
@@ -57,8 +57,8 @@ function showPage(pageid, dir1, dir2) {
 	mypage.show();
     }
     else {
-	$(".page:visible").hide("slide", {direction: dir1}, 30);
-	mypage.show("slide", {direction: dir2}, 40);
+	$(".page:visible").hide("slide", {direction: dir1}, 300);
+	mypage.show("slide", {direction: dir2}, 400);
     }
     $(':focus').blur();
     initPage(mypage);

@@ -1,0 +1,13 @@
+﻿/* @font-face kit by Fonts2u (http://www.fonts2u.com) */ 
+@font-face {
+    font-family:"Sansus Webissimo";
+    src:url("Sansus_Webissimo-Regular.eot?") format("eot"),
+    url("Sansus_Webissimo-Regular.woff") format("woff"),
+    url("Sansus_Webissimo-Regular.ttf") format("truetype"),
+    url("Sansus_Webissimo-Regular.svg#SansusWebissimo") format("svg");
+    font-weight:normal;
+    font-style:normal;
+}
+body {
+    font-family:"Sansus Webissimo";
+}
