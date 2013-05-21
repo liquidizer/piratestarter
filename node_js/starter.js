@@ -32,7 +32,6 @@ $(function() {
     if (urlParamBetrag) {
 	$('#betrag').val(urlParamBetrag[1]);
     }
-    showPage("page1", "init");
     $('.nextButton').click(function(evt) { 
 	var to= $(evt.target).attr('to');
 	if (to.match(/\(\)$/)) to= eval(to);
@@ -44,11 +43,15 @@ $(function() {
     });
     $('html').keyup(validatePage);
     $('html').click(validatePage);
+    showPage("page1", "init");
+//    showPage("lastschrift2", "init");
 });
 
 function showPage(pageid, dir1, dir2) {
     pshistory.push(pageid);
     var mypage= $("#"+pageid);
+    if (mypage.length==0)
+	console.log('page not found: ', pageid);
     if (dir1=="init") {
 	 $(".page").hide();
 	$("#background").fadeIn(500);
@@ -117,6 +120,11 @@ function ueberweisen2or3() {
     return $('#uw_mid').val()!="" ? "ueberweisen_danke" : "ueberweisen2";
 }
 
+function lastschrift3or4() {
+    console.log($('#ls_mid').val()!="" ? "lastschrift3" : "lastschrift2a");
+    return $('#ls_mid').val()!="" ? "lastschrift3" : "lastschrift2a";
+}
+
 function init_lastschrift_danke() {
     $.get('/completeDonation/createLastschrift?token='+token +
 	  '&name='+encodeURI($('#spender').val()) +
@@ -126,6 +134,7 @@ function init_lastschrift_danke() {
 	  '&kto='+encodeURI($('#konto').val()) +
 	  '&blz='+encodeURI($('#blz').val()) +
 	  '&zweck='+encodeURI($('#zweck').val()) +
+	  '&adresse='+encodeURI($('#ls_adresse').val()) +
 	  '&bescheinigung='+encodeURI($('#ls_quittung').val()), 
 	  function(response) {
 	      if (response!="OK") alert('Fehlgeschlagen');
