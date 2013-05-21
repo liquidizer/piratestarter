@@ -1,11 +1,12 @@
-process.chdir("/var/www/piratestarter/node_js");
+//process.chdir("/var/www/piratestarter/node_js");
 var http = require('http');
 var spawn= require('child_process').spawn;
+var callPsas= require('./psas').callPsas;
 var fs = require('fs');
 var url= require('url');
 
 var server= http.createServer(handleRequest);
-server.listen(8888);//, '78.46.227.175');
+server.listen(8888);
 
 // mime types
 var mimes= {
@@ -16,7 +17,11 @@ var mimes= {
     jpg: 'image/jpeg',
     png: 'image/png',
     ico: 'image/ico',
-    svg: 'image/svg+xml'
+    svg: 'image/svg+xml',
+    'ttf': "application/x-font-truetype",
+    otf: "application/x-font-opentype",
+    woff: "application/x-font-woff" ,
+    eot: "application/vnd.ms-fontobject"
 }
 
 // Generate validation code
@@ -32,7 +37,13 @@ function handleRequest(req, res) {
 
     // check code if provided
     var urlParts= url.parse(req.url, true);
-    if (urlParts.pathname=="/createToken") {
+    if (urlParts.pathname=="/psas/getStatus") {
+	callPsas('getStatus', function(data) {
+	    res.end(data);
+
+	});
+    } 
+    else if (urlParts.pathname=="/createToken") {
 	var token = generateCode(6);
 	res.writeHead(200, { 'Content-Type': 'text/plain' });
 	res.end(token);

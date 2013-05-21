@@ -3,6 +3,7 @@ var token= undefined;
 var myid= undefined;
 
 $(function() {
+    initPsas();
     var width= window.innerWidth;
     var height= window.innerHeight;
     if (width > height) {
@@ -44,7 +45,6 @@ $(function() {
     $('html').keyup(validatePage);
     $('html').click(validatePage);
     showPage("page1", "init");
-//    showPage("lastschrift2", "init");
 });
 
 function showPage(pageid, dir1, dir2) {
@@ -53,8 +53,7 @@ function showPage(pageid, dir1, dir2) {
     if (mypage.length==0)
 	console.log('page not found: ', pageid);
     if (dir1=="init") {
-	 $(".page").hide();
-	$("#background").fadeIn(500);
+	$(".page").hide();
 	mypage.fadeIn(500);
     }
     else {
@@ -153,4 +152,15 @@ function init_ueberweisen_danke() {
 	  function(response) {
 	      if (response!="OK") alert('Fehlgeschlagen');
 	  });
+}
+
+function initPsas() {
+    $.get('/psas/getStatus', function(response) {
+	var m=response.match('<Spenden>(.*)</Spenden>')[1];
+	m= m.replace(/(\d\d\d)\./,'.$1,');
+	$('#sumDonations').text(m);
+	m= response.match('<Zusagen>(.*)</Zusagen>')[1];
+	m= m.replace(/\./,',');
+	$('.standDatum').text('Offene Zusagen: '+m);
+    });
 }

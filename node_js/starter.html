@@ -8,10 +8,7 @@
     <script type="text/javascript" src="jquery-ui-git.js"></script>
     <script type="text/javascript" src="starter.js"></script>
     <style>
-      body {
-      background-color: black;
-      }
-      #background, .page {
+      .page {
       display: none;
       }
     </style>
@@ -26,10 +23,10 @@
       <div class="text">
 	Bisher eingegangene Spenden:
 	<p class="bold">
-	  4.029,13€
+	  <span id="sumDonations">4.029,13</span>€
 	</p>
 	<div class="standDatum">
-	  Stand: 15.5.2013
+	  Stand: 20.5.2013
 	</div>
       </div>
       <input type="button" class="nextButton" to="page2"
