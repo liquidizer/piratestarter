@@ -211,3 +211,31 @@ p.bold {
 #payLastschrift:hover {
     background: url(img/last_h.png);
 }
+#preloader {
+    position: absolute;
+    overflow: hidden;
+    visibility: hidden;
+    left: -9999px; 
+    top: -9999px;
+    height: 1px;
+    width: 1px;
+    background-image: url(img/bez.png), 
+                      url(img/bez_h.png), 
+                      url(img/bg.png), 
+                      url(img/down.png), 
+                      url(img/down_h.png), 
+                      url(img/last.png), 
+                      url(img/last_h.png), 
+                      url(img/up.png), 
+                      url(img/up_h.png), 
+                      url(img/weis.png), 
+                      url(img/weis_h.png), 
+                      url(img/widget_kopfzeile.png), 
+                      url(img/widget_spendenknopf_orange.png), 
+                      url(img/widget_spendenknopf_schwarz.png), 
+                      url(img/zur.png), 
+                      url(img/zur_h.png), 
+                      url(img/zur_h_high.png), 
+                      url(img/zur_high.png);
+    
+}
