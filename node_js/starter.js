@@ -1,6 +1,6 @@
 var pshistory=[];
 var token= undefined;
-var myid= undefined;
+var myid= 'TESTTEST';
 
 $(function() {
     initPsas();
@@ -125,42 +125,44 @@ function lastschrift3or4() {
 }
 
 function init_lastschrift_danke() {
-    $.get('/completeDonation/createLastschrift?token='+token +
-	  '&name='+encodeURI($('#spender').val()) +
-	  '&mnr='+encodeURI($('#ls_mid').val()) +
-	  '&betrag='+encodeURI($('#betrag').val()), 
-	  '&inhaber='+encodeURI($('#inhaber').val()) +
-	  '&kto='+encodeURI($('#konto').val()) +
-	  '&blz='+encodeURI($('#blz').val()) +
-	  '&zweck='+encodeURI($('#zweck').val()) +
-	  '&adresse='+encodeURI($('#ls_adresse').val()) +
-	  '&bescheinigung='+encodeURI($('#ls_quittung').val()), 
-	  function(response) {
-	      if (response!="OK") alert('Fehlgeschlagen');
-	  });
+    $.post('createLastschrift','token='+token +
+	   '&name='+encodeURI($('#spender').val()) +
+	   '&mnr='+encodeURI($('#ls_mid').val()) +
+	   '&mail=' +
+	   '&betrag='+encodeURI($('#betrag').val())+
+	   '&inhaber='+encodeURI($('#inhaber').val()) +
+	   '&kto='+encodeURI($('#konto').val()) +
+	   '&blz='+encodeURI($('#blz').val()) +
+	   '&zweck='+encodeURI($('#zweck').val()) +
+	   '&adresse='+encodeURI($('#ls_adresse').val()) +
+	   '&bescheinigung='+encodeURI($('#ls_quittung').is(':checked')), 
+	   function(response) {
+	       if (response!="OK") alert('Fehlgeschlagen');
+	   });
 }
 
 function init_ueberweisen_danke() {
-    $.get('/completeDonation/createUeberweisung?token='+token +
-	  '&mnr='+encodeURI($('#uw_mid').val()) +
-	  '&mail='+encodeURI($('#uw_email').val()) +
-	  '&zweck='+encodeURI($('#zweck').val()) +
-	  '&betrag='+encodeURI($('#betrag').val()) +
-	  '&name='+encodeURI($('#uw_spender').val()) +
-	  '&adresse='+encodeURI($('#uw_adresse').val()) +
-	  '&bescheinigung='+encodeURI($('#uw_quittung').val()),
-	  function(response) {
-	      if (response!="OK") alert('Fehlgeschlagen');
-	  });
+    $.post('/createUeberweisung','token='+token +
+	   '&mnr='+encodeURI($('#uw_mid').val()) +
+	   '&mail='+encodeURI($('#uw_email').val()) +
+	   '&zweck='+encodeURI($('#zweck').val()) +
+	   '&betrag='+encodeURI($('#betrag').val()) +
+	   '&name='+encodeURI($('#uw_spender').val()) +
+	   '&adresse='+encodeURI($('#uw_adresse').val()) +
+	   '&bescheinigung='+encodeURI($('#uw_quittung').is(':checked')),
+	   function(response) {
+	       if (response!="OK") alert('Fehlgeschlagen');
+	   });
 }
 
 function initPsas() {
     $.get('/psas/getStatus', function(response) {
-	var m=response.match('<Spenden>(.*)</Spenden>')[1];
-	m= m.replace(/(\d\d\d)\./,'.$1,');
-	$('#sumDonations').text(m);
-	m= response.match('<Zusagen>(.*)</Zusagen>')[1];
-	m= m.replace(/\./,',');
-	$('.standDatum').text('Offene Zusagen: '+m);
+	$('#sumDonations').text(getParam(response,'Spenden'));
+	$('.standDatum').text('Offene Zusagen: '+getParam(response,'Zusagen'));
     });
+}
+
+function getParam(response, name) {
+    var m=response.match('<'+name+'>(.*)</'+name+'>');
+    return m ? m[1] : undefined;
 }

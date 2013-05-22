@@ -1,4 +1,4 @@
-//process.chdir("/var/www/piratestarter/node_js");
+process.chdir("/var/www/piratestarter/node_js");
 var http = require('http');
 var spawn= require('child_process').spawn;
 var callPsas= require('./psas').callPsas;
@@ -38,27 +38,45 @@ function handleRequest(req, res) {
     // check code if provided
     var urlParts= url.parse(req.url, true);
     if (urlParts.pathname=="/psas/getStatus") {
-	callPsas('getStatus', function(data) {
+	callPsas('getStatus', '', function(data) {
 	    res.end(data);
 
 	});
     } 
     else if (urlParts.pathname=="/createToken") {
-	var token = generateCode(6);
-	res.writeHead(200, { 'Content-Type': 'text/plain' });
-	res.end(token);
-	log('createToken '+ token +' '+ urlParts.query.myid);
+	var myid= urlParts.query.myid;
+	callPsas('createToken','kennung='+myid,function(result) {
+	    var token= result.match(/<string[^>]*>(.*)<\/string>/);
+	    res.end(token && token[1]);
+	    log('createToken '+ (token && token[1]) +' '+ myid);
+	});	
     }
-    else if (req.url.match(/^\/completeDonation\/.*/)) {
-	var request= req.url.match(/^\/completeDonation\/(.*)/)[1];
-	saveEncryptedFile("donation_"+generateCode(10), timeStamp()+' '+request, function(err) {
-	    if (err) {denyAccess(res, "Error"); }
-	    else { 
-		res.end('OK');
-		log(request.replace(/\?.*/,'')+' '+urlParts.query.token);
-	    }
+    else if (urlParts.pathname=="/createLastschrift") {
+	getPostData(req, function(data) {
+	    log('createLastschrift');
+	    callPsas('createLastschrift', data, function () {
+		log('Sent to Psas.');
+	    });
+	    saveEncryptedFile("donation_"+generateCode(10), 
+			      timeStamp()+' createLastschrift?'+data, 
+			      function(err) { 
+				  if (err) denyAccess("Error"); else res.end('OK');
+			      });
 	});
-    } 
+    }
+    else if (urlParts.pathname=="/createUeberweisung") {
+	getPostData(req, function(data) {
+	    log('createUeberweisung');
+	    callPsas('createUeberweisung', data, function () {
+		log('Sent to Psas.');
+	    });
+	    saveEncryptedFile("donation_"+generateCode(10), 
+			      timeStamp()+' createUeberweisung?'+data, 
+			      function(err) {
+				  if (err) denyAccess("Error"); else res.end('OK');
+			      });
+	});
+    }
     else {
 	var filename= urlParts.pathname.replace(/^\//,'') || "test.html";
 	serveFile(res, filename);
@@ -92,6 +110,16 @@ function saveEncryptedFile(filename, data, callback) {
     encrypt(data, function(crypt) {
 	    fs.writeFile(filename, crypt, callback);
 	});
+}
+
+function getPostData(req, callback) {
+    var data='';
+    if (req.method!='POST') 
+	callback();
+    else {
+	req.on('data', function(chunk) { data += chunk; });
+	req.on('end', function() { callback(data); });
+    }
 }
 
 function log(message) {
