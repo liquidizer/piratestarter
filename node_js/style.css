@@ -23,6 +23,7 @@ a {
 
 .small {
     font-size:12px;
+    font-weight:normal;
 }
 p.bold {
     margin: 1ex 0 1ex 0;
@@ -137,11 +138,6 @@ p.bold {
 .wide #jetztSpenden {
     position: relative;
     top: -15px;
-}
-.standDatum {
-    position: absolute;
-    bottom: 10px;
-    left:0;
 }
 .wide #page1 .text {
     margin: 0 0 0 140px;

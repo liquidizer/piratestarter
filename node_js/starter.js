@@ -1,6 +1,6 @@
 var pshistory=[];
 var token= undefined;
-var myid= 'TESTTEST';
+var myid= undefined;
 
 $(function() {
     initPsas();
@@ -157,9 +157,16 @@ function init_ueberweisen_danke() {
 
 function initPsas() {
     $.get('/psas/getStatus', function(response) {
-	$('#sumDonations').text(getParam(response,'Spenden'));
-	$('.standDatum').text('Offene Zusagen: '+getParam(response,'Zusagen'));
+	$('#sumDonations').text(localizeDecimal(getParam(response,'Spenden')));
+	$('#sumPromised').text(localizeDecimal(getParam(response,'Zusagen')));
     });
+}
+
+function localizeDecimal(x) {
+    x= parseFloat(x).toFixed(2);
+    x= x.replace('\.',',');
+    x= x.replace(/(\d)(\d\d\d),/,'$1.$2,');
+    return x;
 }
 
 function getParam(response, name) {
