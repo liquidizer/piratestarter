@@ -153,6 +153,18 @@ p.bold {
     background-position: 0 0;
 }
 
+/* RESTART BUTTON */
+input.restart {
+    width: 162px;
+    height: 113px;
+    border: 0;
+    color: rgba(0,0,0,0);
+    background: url(img/widget-restart.png);
+}
+input.restart:hover {
+    background-position: 0 -113px;
+}
+
 /* PAGE1: jetzt spenden */
 #jetztSpenden {
     width: 226px;
