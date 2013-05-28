@@ -42,7 +42,7 @@ p.bold {
     font-weight: bold;
 }
 
-.page.invalid .nextButton {
+.page.invalid div.nextButton {
     pointer-events: none;
     background-color: gray;
 }
@@ -52,7 +52,7 @@ p.bold {
 }
 /* END DEPRECATED*/
 
-.page div {
+.page .text {
     margin: 0 1em 0 1em;
 }
 
@@ -67,12 +67,6 @@ p.bold {
     display: table;
     float: left;
     width: 170px;
-}
-
-.wide div.uw_quittung {
-    position: absolute;
-    left: 55px;
-    top: 90px;
 }
 
 /* BACKGROUND IMAGE */
@@ -116,12 +110,47 @@ p.bold {
     border: 0px;
     color: rgba(0,0,0,0);
     background: url(img/zur_high.png);
+    margin: 0 0 0 1em;
 }
 .wide .backButton:hover {
     background: url(img/zur_h.png);
 }
 .high .backButton:hover {
     background: url(img/zur_h_high.png);
+}
+
+/* NEXT BUTTON: "Weiter" */
+.high input.weiter {
+    width: 127px;
+    height: 46px;
+    border: 0px;
+    color: rgba(0,0,0,0);
+    background: url(img/widget-weiter_sprite_high.png);
+    background-position: 0 -46px;
+}
+.high input.weiter:hover {
+    background-position: 0 0;
+}
+
+.high .invalid input.weiter.nextButton {
+    background-position: 0 -92px;
+}
+
+.wide input.weiter {
+    width: 46px;
+    height: 97px;
+    border: 0px;
+    color: rgba(0,0,0,0);
+    margin: 0 0 0 1em;
+    background: url(img/widget-weiter_sprite.png);
+    background-position: -46px 0;
+}
+.wide input.weiter:hover {
+    background-position: -92px 0;
+}
+
+.wide .invalid input.weiter.nextButton {
+    background-position: 0 0;
 }
 
 /* PAGE1: jetzt spenden */
@@ -179,12 +208,17 @@ p.bold {
 .wide #jetztBezahlen {
     position: absolute;
     top:80px;
-    left:450px;
+    left:430px;
 }
-.high #jetztBezahlen {
-    position: relative;
-    left: 1em;
+.high .text {
+    margin: 1em 1em 1em 1em;
 }
+.high #mehrOderWeniger {
+    position: absolute;
+    top: 80px;
+    left:150px;
+}
+
 
 /* PAGE3: Zahlungsart */
 #payUeberweisung {
@@ -207,6 +241,7 @@ p.bold {
 #payLastschrift:hover {
     background: url(img/last_h.png);
 }
+
 #preloader {
     position: absolute;
     overflow: hidden;

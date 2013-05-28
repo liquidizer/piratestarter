@@ -23,7 +23,7 @@
       <div class="text">
 	Bisher eingegangene Spenden:
 	<p class="bold">
-	  <span id="sumDonations">4.029,13</span>€
+	  <span id="sumDonations">0,00</span>€
 	  <br/>
 	  <span class="small">+ <span id="sumPromised">0,00</span>€ offene Zusagen</span>
 	</p>
@@ -40,31 +40,33 @@
 	  <tr>
 	    <td>Betrag:</td>
 	    <td><input name="betrag" id="betrag" value="25" data-required/></td>
-	    <td>€</td>
-	  </tr>
-	  <tr>
-	    <td valign="bottom"><span class="ifhigh">Für:</span></td>
 	    <td>
-	    <input type="button" id="betragWeniger"
-		   value="weniger" onclick="betragMehr(.5)"/>
-	    <input type="button" id="betragMehr"
-		   value="mehr" onclick="betragMehr(2)"/>
+	      <select id="currency" name="currency" style="width:60px; display:none">
+		<option name="eur" value="eur">€</option>
+		<option name="btc" value="btc">Btc</option>
+	      </select>
+	      €
+	    </td>
+	    <td>
+	      <div id="mehrOderWeniger">
+		<input type="button" id="betragWeniger" value="weniger" onclick="betragMehr(.5)"/>
+		<input type="button" id="betragMehr" value="mehr" onclick="betragMehr(2)"/>
+	      </div>
 	    </td>
 	  </tr>
-	</table>
-      </div>
-      <div class="text">
-	<table>
-	  <tr><td class="ifwide">Für:</td></tr>
-	  <tr><td>
+	  <tr>	  
+	    <td>Für:</td>
+	    <td colspan="3">
 	      <select name="zweck" id="zweck">
 		<option value="wahlkampf">Wahlkampf Bayern</option>
 	      </select>
 	  </td></tr>
 	</table>
       </div>
-      <input type="button" class="nextButton" to="page3"
-	     id="jetztBezahlen" value="Weiter zur Bezahlung"/>
+      <div class="text">
+	<input type="button" class="nextButton" to="page3orBtc()"
+	       id="jetztBezahlen" value="Weiter zur Bezahlung"/>
+      </div>
     </div>
     <div class="page" id="page3">
       <div>
@@ -91,8 +93,9 @@
 	<div class="kontotext">BLZ:</div>
 	<input id="blz" name="blz" class="px" data-required/><br/>
       </div>
-      <div class="nextButton" to="lastschrift2">
-	Weiter
+      <div class="text">
+	 <input class="weiter nextButton" to="lastschrift2"
+		type="button" value="Weiter"/>
       </div>
     </div>
     <div class="page" id="lastschrift2">
@@ -109,8 +112,9 @@
 	<p class="ifwide"></p>
 	<input id="spender" name="spender" class="px"/>
       </div>
-      <div class="nextButton" to="lastschrift3or4()">
-	Weiter
+      <div class="text">
+	<input class="weiter nextButton" to="lastschrift3or4()"
+	       type="button" value="Weiter"/>
       </div>
     </div>
     <div class="page" id="lastschrift2a">
@@ -122,8 +126,9 @@
         Adresse:<br/>  
 	<textarea id="ls_adresse" name="adresse" class="px" cols="15" rows="2" data-required></textarea>
       </div>
-      <div class="nextButton" to="lastschrift3">
-	Weiter
+      <div class="text">
+	<input class="weiter nextButton" to="lastschrift3"
+	       type="button" value="Weiter"/>
       </div>
     </div>
     <div class="page" id="lastschrift3">
@@ -180,8 +185,9 @@
 	<div class="kontotext">Email Adresse:</div>
 	<input id="uw_email" name="email" class="px"/>
       </div>
-      <div class="nextButton" to="ueberweisen2or3()">
-	Weiter
+      <div class="text">
+	<input class="weiter nextButton" to="ueberweisen2or3()"
+	       type="button" value="Weiter"/>
       </div>
     </div>
     <div class="page invalid" id="ueberweisen2" init="initCode">
@@ -191,17 +197,22 @@
       <div class="text">
 	Name des Spenders:<br/>
 	<input id="uw_spender" name="spender" class="px" data-required/>
+	<br/>
+	<span class="ifwide">
+	  <input id="uw_quittung" type="checkbox"/> Spendenbescheinigung
+	</span>
       </div>
       <div class="text">
 	Adresse:<br/>
 	<textarea id="uw_adresse" name="adresse" class="px" cols="15" rows="2" data-required></textarea>
-	<div class="uw_quittung">
-	  <input id="uw_quittung" type="checkbox"/>
-	  Spendenbescheinigung
-	</div>
+	<br/>
+	<span class="ifhigh">
+	  <input id="uw_quittung" type="checkbox"/> Spendenbescheinigung
+	</span>
       </div>
-      <div class="nextButton" to="ueberweisen_danke">
-	Weiter
+      <div class="text">
+	<input class="weiter nextButton" to="ueberweisen_danke"
+	       type="button" value="Weiter"/>
       </div>
     </div>
     <div class="page" id="ueberweisen_danke" init="initCode">
@@ -234,6 +245,14 @@
 	zum
 	<br class="ifwide"/>
 	Start
+      </div>
+    </div>
+    <div class="page" id="bitcoin1">
+      <div>
+	<input type="button" class="backButton" value="zurueck"/>
+      </div>
+      <div class="text">
+	Pay per Bitcoin
       </div>
     </div>
     <div id="preloader"></div>

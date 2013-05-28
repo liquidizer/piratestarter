@@ -4,6 +4,26 @@ var myid= undefined;
 
 $(function() {
     initPsas();
+    initLayout();
+    processUrlParameters();
+    $('.nextButton').click(function(evt) { 
+	var to= $(evt.target).attr('to');
+	if (to.match(/\(\)$/)) to= eval(to);
+	showPage(to, "left", "right"); 
+    });
+    $('.backButton').click(function() {
+	pshistory.pop();
+	showPage(pshistory.pop(), "right", "left");
+    });
+    $('html').keyup(validatePage);
+    $('html').click(validatePage);
+    $('#currency').change(function() {
+	$('#betrag').val(($(this).val()=="eur") ? '25' : localizeDecimal(0.25, 6));
+    });
+    showPage("page1", "init");
+});
+
+function initLayout() {
     var width= window.innerWidth;
     var height= window.innerHeight;
     if (width > height) {
@@ -13,7 +33,9 @@ $(function() {
         $('.ifwide').remove();
     }
     $('#background').attr('width',width).attr('height',height);   
+}
 
+function processUrlParameters() {
     var urlId= location.search.match('[?&]myid=([^&]*)');
     if (urlId) {
 	myid= urlId[1];
@@ -33,19 +55,7 @@ $(function() {
     if (urlParamBetrag) {
 	$('#betrag').val(urlParamBetrag[1]);
     }
-    $('.nextButton').click(function(evt) { 
-	var to= $(evt.target).attr('to');
-	if (to.match(/\(\)$/)) to= eval(to);
-	showPage(to, "left", "right"); 
-    });
-    $('.backButton').click(function() {
-	pshistory.pop();
-	showPage(pshistory.pop(), "right", "left");
-    });
-    $('html').keyup(validatePage);
-    $('html').click(validatePage);
-    showPage("page1", "init");
-});
+}
 
 function showPage(pageid, dir1, dir2) {
     pshistory.push(pageid);
@@ -97,7 +107,11 @@ function validatePage() {
 }
 
 function betragMehr(factor) {
-    $('#betrag').val((parseFloat($('#betrag').val())*factor).toFixed(0));
+    var newVal= (myFloat($('#betrag').val())*factor);
+    if ($('#currency').val()=="eur")
+	$('#betrag').val(newVal.toFixed(0));
+    else
+	$('#betrag').val(localizeDecimal(newVal,6));
 }
 
 function init_page1() {
@@ -107,6 +121,10 @@ function init_page1() {
 function init_page2() {
     if (!token)
 	$.get('/createToken?myid='+myid, function(msg) { token= msg; });
+}
+
+function page3orBtc() {
+    return ($('#currency').val()=="eur") ? "page3" : "bitcoin1";
 }
 
 function init_lastschrift2() {
@@ -127,9 +145,9 @@ function lastschrift3or4() {
 function init_lastschrift_danke() {
     $.post('createLastschrift','token='+token +
 	   '&name='+encodeURI($('#spender').val()) +
-	   '&mnr='+encodeURI($('#ls_mid').val()) +
+	   '&mnr='+encodeURI($('#ls_mid').val() || 0) +
 	   '&mail=' +
-	   '&betrag='+encodeURI($('#betrag').val())+
+	   '&betrag='+encodeURI(myFloat($('#betrag').val()))+
 	   '&inhaber='+encodeURI($('#inhaber').val()) +
 	   '&kto='+encodeURI($('#konto').val()) +
 	   '&blz='+encodeURI($('#blz').val()) +
@@ -143,10 +161,10 @@ function init_lastschrift_danke() {
 
 function init_ueberweisen_danke() {
     $.post('/createUeberweisung','token='+token +
-	   '&mnr='+encodeURI($('#uw_mid').val()) +
+	   '&mnr='+encodeURI($('#uw_mid').val() || 0) +
 	   '&mail='+encodeURI($('#uw_email').val()) +
 	   '&zweck='+encodeURI($('#zweck').val()) +
-	   '&betrag='+encodeURI($('#betrag').val()) +
+	   '&betrag='+encodeURI(myFloat($('#betrag').val())) +
 	   '&name='+encodeURI($('#uw_spender').val()) +
 	   '&adresse='+encodeURI($('#uw_adresse').val()) +
 	   '&bescheinigung='+encodeURI($('#uw_quittung').is(':checked')),
@@ -162,11 +180,19 @@ function initPsas() {
     });
 }
 
-function localizeDecimal(x) {
-    x= parseFloat(x).toFixed(2);
+function localizeDecimal(x, digits) {
+    x= parseFloat(x).toFixed(digits || 2);
     x= x.replace('\.',',');
     x= x.replace(/(\d)(\d\d\d),/,'$1.$2,');
     return x;
+}
+
+function myFloat(x) {
+    if (x.match(/,([0-9]*)$/)) {
+	x= x.replace(/\./,'');
+	x= x.replace(/,([0-9]*)$/,'.$1');
+    }
+    return parseFloat(x);
 }
 
 function getParam(response, name) {
