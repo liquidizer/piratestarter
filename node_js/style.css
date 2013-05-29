@@ -101,25 +101,25 @@ p.bold {
 
 /* BACK BUTTON */
 .wide .backButton {
-    width: 55px;
-    height: 129px;
+    width: 47px;
+    height: 103px;
     border: 0px;
     color: rgba(0,0,0,0);
-    background: url(img/zur.png);
+    background: url(img/zur_wide.png);
+}
+.wide .backButton:hover {
+    background-position: -47px 0;
 }
 .high .backButton {
     width: 103px;
-    height: 55px;
+    height: 47px;
     border: 0px;
     color: rgba(0,0,0,0);
     background: url(img/zur_high.png);
     margin: 0 0 0 1em;
 }
-.wide .backButton:hover {
-    background: url(img/zur_h.png);
-}
 .high .backButton:hover {
-    background: url(img/zur_h_high.png);
+    background-position: 0 -47px;
 }
 
 /* NEXT BUTTON: "Weiter" */
@@ -172,12 +172,12 @@ input.restart:hover {
 #jetztSpenden {
     width: 226px;
     height: 141px;
-    background: url(img/widget_spendenknopf_schwarz.png);
+    background: url(img/widget_spendenknopf.png);
     border: 0px;
     color: rgba(0,0,0,0);
 }
 #jetztSpenden:hover {
-    background: url(img/widget_spendenknopf_orange.png);
+    background-position: 0 -141px;
 }
 .wide #jetztSpenden {
     position: relative;
@@ -198,13 +198,13 @@ input.restart:hover {
     background: url(img/up.png);
 }
 #betragMehr:hover {
-    background: url(img/up_h.png);
+    background-position: 0 -45px;
 }
 #betragWeniger {
     background: url(img/down.png);
 }
 #betragWeniger:hover {
-    background: url(img/down_h.png);
+    background-position: 0 -45px;
 }
 #betrag {
     text-align: right;
@@ -218,7 +218,7 @@ input.restart:hover {
     background: url(img/bez.png);
 }
 #jetztBezahlen:hover {
-    background: url(img/bez_h.png);
+    background-position: 0 -129px;
 }
 .wide #jetztBezahlen {
     position: absolute;
@@ -237,51 +237,34 @@ input.restart:hover {
 
 /* PAGE3: Zahlungsart */
 #payUeberweisung {
-    width: 242px;
-    height: 100px;
+    width: 217px;
+    height: 99px;
     border: 0px;
     color: rgba(0,0,0,0);
     background: url(img/weis.png);
 }
 #payUeberweisung:hover {
-    background: url(img/weis_h.png);
+    background-position: 0 -99px;
 }
 #payLastschrift {
-    width: 221px;
-    height: 100px;
+    width: 217px;
+    height: 99px;
     border: 0px;
     color: rgba(0,0,0,0);
     background: url(img/last.png);
 }
 #payLastschrift:hover {
-    background: url(img/last_h.png);
+    background-position: 0 -99px;
 }
 
-#preloader {
-    position: absolute;
-    overflow: hidden;
-    visibility: hidden;
-    left: -9999px; 
-    top: -9999px;
-    height: 1px;
-    width: 1px;
-    background-image: url(img/bez.png), 
-                      url(img/bez_h.png), 
-                      url(img/bg.png), 
-                      url(img/down.png), 
-                      url(img/down_h.png), 
-                      url(img/last.png), 
-                      url(img/last_h.png), 
-                      url(img/up.png), 
-                      url(img/up_h.png), 
-                      url(img/weis.png), 
-                      url(img/weis_h.png), 
-                      url(img/widget_kopfzeile.png), 
-                      url(img/widget_spendenknopf_orange.png), 
-                      url(img/widget_spendenknopf_schwarz.png), 
-                      url(img/zur.png), 
-                      url(img/zur_h.png), 
-                      url(img/zur_h_high.png), 
-                      url(img/zur_high.png);
-    
+/* LASTSCHRIFT3: Ich bin einverstanden */
+input.einverstanden {
+    width: 221px;
+    height: 129px;
+    border: 0px;
+    color: rgba(0,0,0,0);
+    background: url(img/widget-ok.png);
+}
+input.einverstanden:hover {
+    background-position: 0 -129px;
 }

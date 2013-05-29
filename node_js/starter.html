@@ -144,10 +144,9 @@
 	<input id="ls_quittung" type="checkbox"/>
 	Spendenbescheinigung
       </div>
-      <div class="nextButton" to="lastschrift_danke">
-	Ich bin
-	<br/>
-	einverstanden.
+      <div class="text">
+	<input class="einverstanden nextButton" to="lastschrift_danke"
+	       value="Ich bin einverstanden" type="button"/>
       </div>
     </div>
     <div class="page" id="lastschrift_danke">
@@ -233,12 +232,9 @@
 	  zur Verfolgung der Spende)
 	</span>
       </div>
-      <div class="nextButton" to="page1">
-	Zurück 
-	<br class="ifwide"/>
-	zum
-	<br class="ifwide"/>
-	Start
+      <div class="text">
+	<input class="restart nextButton" to="page1"
+	       value="Zurück zum Start" type="button"/>
       </div>
     </div>
     <div class="page" id="bitcoin1">
@@ -249,6 +245,5 @@
 	Pay per Bitcoin
       </div>
     </div>
-    <div id="preloader"></div>
   </body>
 </html>
