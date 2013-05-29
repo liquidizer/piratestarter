@@ -27,10 +27,13 @@ function initLayout() {
     var width= window.innerWidth;
     var height= window.innerHeight;
     if (width > height) {
-       $('body').addClass('wide').removeClass('high');
+	$('body').addClass('wide');
  	$('.ifhigh').remove();
+	$('#header-img').attr('src','img/header-wide.png');
     } else {
+	$('body').addClass('high');
         $('.ifwide').remove();
+	$('#header-img').attr('src','img/header-high.png');
     }
     $('#background').attr('width',width).attr('height',height);   
 }

@@ -84,7 +84,6 @@ p.bold {
 }
 #header .bar {
     position: absolute;
-    height:43px;
     width: 100%;
     top: 17px;
     background: black;
@@ -92,8 +91,12 @@ p.bold {
 #header img {
     position: relative;
 }
-.high #header img {
-    left: -77px;
+
+.high #header .bar {
+    height: 33px;
+}
+.wide #header .bar {
+    height:43px;
 }
 
 /* BACK BUTTON */
