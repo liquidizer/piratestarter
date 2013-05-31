@@ -18,9 +18,9 @@ var mimes= {
     png: 'image/png',
     ico: 'image/ico',
     svg: 'image/svg+xml',
-    'ttf': "application/x-font-truetype",
-    otf: "application/x-font-opentype",
-    woff: "application/x-font-woff" ,
+    'ttf': "application/font-truetype",
+    otf: "application/font-opentype",
+    woff: "application/font-woff" ,
     eot: "application/vnd.ms-fontobject"
 }
 
@@ -72,6 +72,16 @@ function handleRequest(req, res) {
 	    });
 	    saveEncryptedFile("donation_"+generateCode(10), 
 			      timeStamp()+' createUeberweisung?'+data, 
+			      function(err) {
+				  if (err) denyAccess("Error"); else res.end('OK');
+			      });
+	});
+    }
+    else if (urlParts.pathname=="/createBitcoinSpende") {
+	getPostData(req, function(data) {
+	    log('createBitcoinSpende');
+	    saveEncryptedFile("donation_"+generateCode(10), 
+			      timeStamp()+' createBitcoinSpende?'+data, 
 			      function(err) {
 				  if (err) denyAccess("Error"); else res.end('OK');
 			      });

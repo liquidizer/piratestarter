@@ -14,7 +14,7 @@
     </style>
   </head>
   <body>
-    <img id="background" src="img/bg.png"/>
+    <img id="background" src="img/bg-wide-blue.png"/>
     <div id="header">
       <div class="bar">&nbps;</div>
       <a href="http://piratestarter.de" target="_blank"><img id="header-img" src=""/></a>
@@ -39,13 +39,12 @@
 	<table>
 	  <tr>
 	    <td>Betrag:</td>
-	    <td><input name="betrag" id="betrag" value="25" data-required/></td>
 	    <td>
-	      <select id="currency" name="currency" style="width:60px; display:none">
+	      <input name="betrag" id="betrag" value="25" data-required/>
+	      <select id="currency" name="currency">
 		<option name="eur" value="eur">€</option>
 		<option name="btc" value="btc">Btc</option>
 	      </select>
-	      €
 	    </td>
 	    <td>
 	      <div id="mehrOderWeniger">
@@ -54,8 +53,14 @@
 	      </div>
 	    </td>
 	  </tr>
+	  <tr class="ifhigh">
+	    <td valign="bottom">Für:</td>
+	    <td>
+	      <span class="ifhigh" data-replace="mehrOderWeniger"></span>
+	    </td>
+	  </tr>
 	  <tr>	  
-	    <td>Für:</td>
+	    <td class="ifwide">Für:</td>
 	    <td colspan="3">
 	      <select name="zweck" id="zweck">
 		<option value="wahlkampf">Wahlkampf Bayern</option>
@@ -242,7 +247,65 @@
 	<input type="button" class="backButton" value="zurueck"/>
       </div>
       <div class="text">
-	Pay per Bitcoin
+	Wenn wir deine Identität<br/>kennen, bekommen wir<br/>staatlichen Zuschuss.
+      </div>
+      <div class="text nextButton" to="bitcoin4">
+	Ich möchte<br/>anonym<br class="ifwide"/> bleiben.
+      </div>
+      <div class="text nextButton" to="bitcoin2">
+	Ich möchte<br/>meine Identität<br class="ifwide"/> angeben.
+      </div>
+    </div>
+    <div class="page invalid" id="bitcoin2">
+      <div class="text">
+	<input type="button" class="backButton" value="zurueck"/>
+      </div>
+      <div class="text">
+	<div class="kontotext">Dein Bitcoin-Konto:</div>
+	<input id="btc_from" name="btc_from" class="px" data-required/>
+	<br/>
+	<div class="kontotext">Mitgliedsnummer<br/>(falls vorhanden):</div>
+	<input id="btc_mid" name="mitgliedsnummer" class="px"/>
+	<br/>
+	<input id="btc_quittung" type="checkbox"/> Spendenbescheinigung
+      </div>
+      <div class="text">
+	<input class="weiter nextButton" to="bitcoin3or4()"
+	       type="button" value="Weiter"/>
+      </div>
+    </div>
+    <div class="page invalid" id="bitcoin3">
+      <div class="text">
+	<input type="button" class="backButton" value="zurueck"/>
+      </div>
+      <div class="text">
+	Dein Name und<br class="ifwide"/> Deine Adresse:<br/>
+      </div>
+      <div class="text">
+	<textarea id="btc_identity" name="adresse" class="px" cols="15" rows="4" data-required></textarea>
+      </div>
+      <div class="text">
+	<input class="weiter nextButton" to="bitcoin4"
+	       type="button" value="Weiter"/>
+      </div>
+    </div>
+    <div class="page" id="bitcoin4">
+      <div class="text">
+	<a id="bitcoinuri" href="bitcoin:1KvUzErYa3Y6QDpwLWnycwrLbrLA4imXrc?label=Piratestarter&message=Wahlkampf&amount=0X8">
+	  <div class="bitcoinaddress">
+	    <img src="img/qrcode.png"/>
+	  </div>
+	</a>
+      </div>
+      <div class="text">
+	Spendenadresse:
+	<div class="bitcoinaddress">
+	  1KvUzErYa3Y6QDpwL<wbr/>WnycwrLbrLA4imXrc
+	</div>
+      </div>
+      <div class="text">
+	<input class="restart nextButton" to="page1"
+	       value="Zurück zum Start" type="button"/>
       </div>
     </div>
   </body>

@@ -31,7 +31,7 @@ p.bold {
     font-size:30px;
 }
 
-/* DEPRECATED */
+/* GENERIC NEXT BUTTON */
 .page div.nextButton {
     text-align: center;
     border: 2px solid white;
@@ -43,15 +43,18 @@ p.bold {
 }
 
 .page.invalid div.nextButton {
-    pointer-events: none;
     background-color: gray;
 }
+.page.invalid .nextButton {
+    pointer-events: none;
+}
+
 
 .page div.nextButton:hover {
     background-color: orange;
 }
-/* END DEPRECATED*/
 
+/* PAGE TEXT LAYOUT */
 .page .text {
     margin: 0 1em 0 1em;
 }
@@ -208,7 +211,10 @@ input.restart:hover {
 }
 #betrag {
     text-align: right;
-    width: 100px;
+    width: 80px;
+}
+#currency {
+    width: 60px;
 }
 #jetztBezahlen {
     width: 212px;
@@ -228,12 +234,6 @@ input.restart:hover {
 .high .text {
     margin: 1em 1em 1em 1em;
 }
-.high #mehrOderWeniger {
-    position: absolute;
-    top: 80px;
-    left:150px;
-}
-
 
 /* PAGE3: Zahlungsart */
 #payUeberweisung {
@@ -267,4 +267,17 @@ input.einverstanden {
 }
 input.einverstanden:hover {
     background-position: 0 -129px;
+}
+
+/* BITCOIN */
+.bitcoinaddress {
+    border: 1px solid black;
+    background-color: white;
+    padding: 3px;
+    font-family: "courier";
+    text-align: center;
+    max-width: 200px;
+}
+.bitcoinaddress:hover {
+    background-color: orange;
 }

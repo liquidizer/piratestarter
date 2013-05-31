@@ -18,7 +18,7 @@ $(function() {
     $('html').keyup(validatePage);
     $('html').click(validatePage);
     $('#currency').change(function() {
-	$('#betrag').val(($(this).val()=="eur") ? '25' : localizeDecimal(0.25, 6));
+	$('#betrag').val(($(this).val()=="eur") ? '25' : localizeDecimal(0.25, 4));
     });
     showPage("page1", "init");
 });
@@ -35,6 +35,9 @@ function initLayout() {
         $('.ifwide').remove();
 	$('#header-img').attr('src','img/header-high.png');
     }
+    $('[data-replace]').each(function(index, elt) {
+	$(elt).append($('#'+$(elt).attr('data-replace')));
+    });
     $('#background').attr('width',width).attr('height',height);   
 }
 
@@ -57,6 +60,11 @@ function processUrlParameters() {
     var urlParamBetrag= location.search.match('[?&]betrag=([^&]*)');
     if (urlParamBetrag) {
 	$('#betrag').val(urlParamBetrag[1]);
+    }
+    var urlParamBG= location.search.match('[?&]bg=([^&]*)');
+    if (urlParamBG) {
+	if (urlParamBG[1].match(/^o/))
+	    $('#background').attr('src', 'img/bg-wide-orange.png');
     }
 }
 
@@ -114,7 +122,7 @@ function betragMehr(factor) {
     if ($('#currency').val()=="eur")
 	$('#betrag').val(newVal.toFixed(0));
     else
-	$('#betrag').val(localizeDecimal(newVal,6));
+	$('#betrag').val(localizeDecimal(newVal,4));
 }
 
 function init_page1() {
@@ -128,6 +136,10 @@ function init_page2() {
 
 function page3orBtc() {
     return ($('#currency').val()=="eur") ? "page3" : "bitcoin1";
+}
+
+function bitcoin3or4() {
+    return ($('#btc_mid').val()=="") ? "bitcoin3" : "bitcoin4";
 }
 
 function init_lastschrift2() {
@@ -174,6 +186,26 @@ function init_ueberweisen_danke() {
 	   function(response) {
 	       if (response!="OK") alert('Fehlgeschlagen');
 	   });
+}
+
+function init_bitcoin4() {
+    $.post('/createBitcoinSpende','token='+token +
+	   '&mnr='+encodeURI($('#btc_mid').val() || 0) +
+	   '&zweck='+ encodeURI($('#zweck').val()) +
+	   '&betrag='+encodeURI(myFloat($('#betrag').val())) +
+	   '&name=' +
+	   '&adresse='+encodeURI($('#btc_identity').val()) +
+	   '&bescheinigung='+encodeURI($('#btc_quittung').is(':checked')) +
+	   '&btcfrom=' + encodeURI($('#btc_from').val()),
+	   function(response) {
+	       if (response!="OK") alert('Fehlgeschlagen');
+	   });
+}
+
+function init_bitcoin1() {
+    var betrag= myFloat($('#betrag').val());
+    var bc= $('#bitcoinuri');
+    bc.attr('href',bc.attr('href').replace(/amount=.*/,'amount='+betrag+'X8'));
 }
 
 function initPsas() {
