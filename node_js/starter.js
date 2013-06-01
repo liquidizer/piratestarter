@@ -48,7 +48,7 @@ function processUrlParameters() {
     }
     var urlParamZweck= location.search.match('[?&]zwecke=([^&]*)');
     if (urlParamZweck) {
-	var zwecke= decodeURI(urlParamZweck[1]).split(",");
+	var zwecke= decodeURI(urlParamZweck[1]).split(/,|\|/);
 	zwecke.forEach(function (zweck) {
 	    $('#zweck').append("<option value='"+zweck+"'>"+zweck+"</option>");
 	});

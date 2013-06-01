@@ -1,33 +1,69 @@
 <html>
   <head>
-    <title>PirateStarter Test Page</title>
+    <title>PirateStarter Kit</title>
+    <script type="text/javascript" src="jquery-latest.min.js"></script>
+    <script type="text/javascript" src="builder.js"></script>
+    <style>
+      div,iframe {
+      margin: 10px;
+      }
+    </style>
   </head>
-  <body style="background-color: gray; color:white;">
+  <body>
     
     <h1>Einbinden der Pirate Starter Seite</h1>
+
+    <h2>Parameter</h2>
+    <div>
+      <table>
+	<tr>
+	  <td>Eigene Kennung:</td>
+	  <td><input id="kennung"/></td>
+	</tr>
+	<tr>
+	  <td>Hintergrund:</td>
+	  <td>
+	    <select id="bg">
+	      <option value="blue">Blau</option>
+	      <option value="orange">Orange</option>
+	    </select>
+	  </td>
+	</tr>
+	<tr>
+	  <td>Format:</td>
+	  <td>
+	    <select id="format">
+	      <option value="high">Hoch</option>
+	      <option value="wide">Query</option>
+	    </select>
+	  </td>
+	</tr>
+	<tr>
+	  <td>Spendenzwecke:</td>
+	  <td>
+	    <select id="hasPurpose">
+	      <option value="no">Wahlkampf Bayern</option>
+	      <option value="yes">Andere Spendenzwecke</option>
+	    </select>
+	  </td>	    
+	</tr>
+	<tr id="zweck_input" style="display:none">
+	  <td></td>
+	  <td>
+	    Zweckliste (ein Zweck pro Zeile)
+	    <br/>
+	    <textarea type="text" cols="30" rows="5" id="zwecke"></textarea>
+	  </td>
+      </table>
+    </div>
     
-    <p style="font-family:monospace">
-      &lt;iframe src="https://stuke9.piratenpartei-bayern.de/starter.html" width="280" height="400" scrolling="no" frameborder="0"&gt;&lt;/iframe&gt;
-    </p>
-    <iframe src="starter.html?myid=testpage" width="280" height="400" scrolling="no" frameborder="0"></iframe>
+    <h2>Resultierender HTML Code</h2>
+    <div id="code" style="font-family:monospace; padding:10px; border:1px solid black; background:white">
+    </div>
 
-    <h1>Breites Format</h1>
-    <p style="font-family:monospace">
-      &lt;iframe src="https://stuke9.piratenpartei-bayern.de/starter.html" width="650" height="200" scrolling="no" frameborder="0"&gt;&lt;/iframe&gt;
-    </p>
-    <iframe src="starter.html?myid=testpage" width="650" height="200" scrolling="no" frameborder="0"></iframe>
-
-    <h1>Oranger Hintergrund</h1>
-    <p style="font-family:monospace">
-      &lt;iframe src="https://stuke9.piratenpartei-bayern.de/starter.html?bg=orange" width="650" height="200" scrolling="no" frameborder="0"&gt;&lt;/iframe&gt;
-    </p>
-    <iframe src="starter.html?myid=testpage&bg=orange" width="650" height="200" scrolling="no" frameborder="0"></iframe>
-
-    <h1>Einbinden mit Zweckauswahl</h1>
-    
-    <p style="font-family:monospace">
-      &lt;iframe src="https://stuke9.piratenpartei-bayern.de/starter.html?zwecke=KV%20M%C3%BCnchen,Bzv%20Oberbayern" width="280" height="400"  scrolling="no" frameborder="0"&gt;&lt;/iframe&gt;
-    </p>
-    <iframe src="starter.html?zwecke=KV%20M%C3%BCnchen,Bzv%20Oberbayern&myid=testpage" width="280" height="400" scrolling="no" frameborder="0"></iframe>
+    <h2>Teste Dein Applet</h2>
+    <div id="iframe">
+      iframe goes here!
+    </div>
   </body>
 </html>
