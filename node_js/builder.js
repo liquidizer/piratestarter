@@ -1,13 +1,16 @@
 $(function() {
     repaint();
+    showCode();
     $('select,input,textarea').change(repaint);
+    $('#codeoption').change(showCode);
 });
 
 function repaint() {
     var html= getHtmlCode();
     $('#zweck_input').toggle($('#hasPurpose').val()=='yes');
     $('#code').text(html);
-    $('#dci').text(getDciCode);
+    $('#dci').text(getDciCode());
+    $('#uri').text(getSrc());
     if ($('#iframe').html()!=html)
 	$('#iframe').html(html);
 }
@@ -60,4 +63,10 @@ function getSrc() {
 
 function addParam(html, param) {
     return html + (html.match(/\?/) ? '&' : '?') +param;
+}
+
+function showCode() {
+    $('div.codeoption').hide();
+    var option= $('#codeoption').val();
+    $('#'+option).show();
 }

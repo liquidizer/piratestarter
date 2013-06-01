@@ -54,6 +54,10 @@ p.bold {
 }
 
 /* PAGE TEXT LAYOUT */
+.page {
+    position: absolute;
+}
+
 .page .text {
     margin: 0 1em 0 1em;
 }
@@ -224,11 +228,6 @@ input.restart:hover {
 }
 #jetztBezahlen:hover {
     background-position: 0 -129px;
-}
-.wide #jetztBezahlen {
-    position: absolute;
-    top:80px;
-    left:430px;
 }
 .high .text {
     margin: 1em 1em 1em 1em;
