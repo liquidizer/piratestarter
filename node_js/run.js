@@ -25,6 +25,7 @@ var mimes= {
 }
 
 var btc= '1KvUzErYa3Y6QDpwLWnycwrLbrLA4imXrc';
+var btc_cache='?';
 
 // Generate validation code
 function generateCode(len) {
@@ -42,7 +43,6 @@ function handleRequest(req, res) {
     if (urlParts.pathname=="/psas/getStatus") {
 	callPsas('getStatus', '', function(data) {
 	    res.end(data);
-
 	});
     } 
     else if (urlParts.pathname=="/getBitcoinStatus") {
@@ -51,9 +51,13 @@ function handleRequest(req, res) {
 	    path: '/de/q/addressbalance/'+btc
 	};
 	http.get(options, function(red) {
-	    red.on('data', function(chunk) { res.write(chunk.toString()); });
-	    red.on('end', function() {res.end();});
-	});
+	    var btc_state='';
+	    red.on('data', function(chunk) { btc_state+=chunk.toString(); });
+	    red.on('end', function() {
+		btc_cache= btc_state;
+		res.end(btc_cache);
+	    });
+	}).on('error', function(e) { res.end(btc_cache); });
     } 
     else if (urlParts.pathname=="/createToken") {
 	var myid= urlParts.query.myid;
