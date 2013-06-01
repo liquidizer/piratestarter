@@ -213,6 +213,10 @@ function initPsas() {
 	$('#sumDonations').text(localizeDecimal(getParam(response,'Spenden')));
 	$('#sumPromised').text(localizeDecimal(getParam(response,'Zusagen')));
     });
+    $.get('/getBitcoinStatus', function(response) {
+	var btc= parseFloat(response)/1e8;
+	$('#sumBitcoins').text(localizeDecimal(btc,4));
+    });
 }
 
 function localizeDecimal(x, digits) {

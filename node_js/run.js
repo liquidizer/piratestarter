@@ -24,6 +24,8 @@ var mimes= {
     eot: "application/vnd.ms-fontobject"
 }
 
+var btc= '1KvUzErYa3Y6QDpwLWnycwrLbrLA4imXrc';
+
 // Generate validation code
 function generateCode(len) {
     var chars= ['0', '1', '2', '3', '4', '5','6', '7', '8', '9', 'a', 'B', 'C', 'd', 'E', 'f',
@@ -41,6 +43,16 @@ function handleRequest(req, res) {
 	callPsas('getStatus', '', function(data) {
 	    res.end(data);
 
+	});
+    } 
+    else if (urlParts.pathname=="/getBitcoinStatus") {
+	var options= {
+	    host: 'blockchain.info',
+	    path: '/de/q/addressbalance/'+btc
+	};
+	http.get(options, function(red) {
+	    red.on('data', function(chunk) { res.write(chunk.toString()); });
+	    red.on('end', function() {res.end();});
 	});
     } 
     else if (urlParts.pathname=="/createToken") {
