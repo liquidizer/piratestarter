@@ -39,7 +39,6 @@ p.bold {
     padding: 0.5em;
     color: white;
     background-color: black;
-    font-weight: bold;
 }
 
 .page.invalid div.nextButton {

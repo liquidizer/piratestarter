@@ -11,9 +11,7 @@
   </head>
   <body>
     
-    <h1>Einbinden der Pirate Starter Seite</h1>
-
-    <h2>Parameter</h2>
+    Deine Parameter:
     <div>
       <table>
 	<tr>
@@ -34,12 +32,12 @@
 	  <td>
 	    <select id="format">
 	      <option value="high">Hoch</option>
-	      <option value="wide">Query</option>
+	      <option value="wide">Quer</option>
 	    </select>
 	  </td>
 	</tr>
 	<tr>
-	  <td>Spendenzwecke:</td>
+	  <td>Spendenzweck:</td>
 	  <td>
 	    <select id="hasPurpose">
 	      <option value="no">Wahlkampf Bayern</option>
@@ -54,14 +52,24 @@
 	    <br/>
 	    <textarea type="text" cols="30" rows="5" id="zwecke"></textarea>
 	  </td>
+	</tr>
+	<tr>
+	  <td>Vorgeschlagener Betrag</td>
+	  <td>
+	    <input id="betrag" type="number" value="25.00" style="text-align:right"/>
+	  </td>
       </table>
     </div>
     
-    <h2>Resultierender HTML Code</h2>
+    So kannst Du das Applet in Wordpress mittels DciFrame einbinden:
+    <div id="dci" style="font-family:monospace; padding:10px; border:1px solid black; background:white">
+    </div>
+
+    Mit diesem Code kannst Du das Applet in HTML Code einbinden:
     <div id="code" style="font-family:monospace; padding:10px; border:1px solid black; background:white">
     </div>
 
-    <h2>Teste Dein Applet</h2>
+    Hier ist eine Vorschau auf dein Applet. Es ist bereit zum Testen!
     <div id="iframe">
       iframe goes here!
     </div>

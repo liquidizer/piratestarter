@@ -1,6 +1,7 @@
 var pshistory=[];
 var token= undefined;
 var myid= undefined;
+var amount= 25;
 
 $(function() {
     initPsas();
@@ -18,7 +19,7 @@ $(function() {
     $('html').keyup(validatePage);
     $('html').click(validatePage);
     $('#currency').change(function() {
-	$('#betrag').val(($(this).val()=="eur") ? '25' : localizeDecimal(0.25, 4));
+	$('#betrag').val(($(this).val()=="eur") ? amount : localizeDecimal(amount/100, 4));
     });
     showPage("page1", "init");
 });
@@ -59,6 +60,7 @@ function processUrlParameters() {
     }
     var urlParamBetrag= location.search.match('[?&]betrag=([^&]*)');
     if (urlParamBetrag) {
+	amount= parseFloat(urlParamBetrag[1]);
 	$('#betrag').val(urlParamBetrag[1]);
     }
     var urlParamBG= location.search.match('[?&]bg=([^&]*)');

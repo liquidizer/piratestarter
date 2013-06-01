@@ -4,20 +4,44 @@ $(function() {
 });
 
 function repaint() {
-    var html= getCode();
+    var html= getHtmlCode();
     $('#zweck_input').toggle($('#hasPurpose').val()=='yes');
     $('#code').text(html);
+    $('#dci').text(getDciCode);
     if ($('#iframe').html()!=html)
 	$('#iframe').html(html);
 }
 
-function getCode() {
-    var html='<iframe src="https://stuke9.piratenpartei-bayern.de/starter.html';
+function getHtmlCode() {
+    var html='<iframe src="'+getSrc()+'"';
+
+    if ($('#format').val()=='high') {
+	html+=' width="280" height="400"';
+    } else {
+	html+=' width="640" height="200"';
+    }
+    html+=' scrolling="no" frameborder="0"></iframe>';
+    return html;
+}
+
+function getDciCode() {
+    var code= '[dciframe]'+getSrc();
+    if ($('#format').val()=='high') {
+	code+=',280,400';
+    } else {
+	code+=',640,200';
+    }
+    code+=',0,no[/dciframe]';
+    return code;
+};
+
+function getSrc() {
+    src='https://stuke9.piratenpartei-bayern.de/starter.html';
     if ($('#kennung').val()) {
-	html= addParam(html, 'myid='+$('#kennung').val());
+	src= addParam(src, 'myid='+$('#kennung').val());
     }
     if ($('#bg').val()=='orange') {
-	html= addParam(html,'bg=orange');
+	src= addParam(src,'bg=orange');
     }
     if ($('#hasPurpose').val()=='yes') {
 	var zwecke= $('#zwecke').val()
@@ -26,17 +50,12 @@ function getCode() {
 	    .filter(function(x) { return x.length>0; })
 	    .join('|');
 	if (zwecke.length>0)
-	    html= addParam(html, 'zwecke='+encodeURI(zwecke));
+	    src= addParam(src, 'zwecke='+encodeURI(zwecke));
     }
-    html+='"';
-
-    if ($('#format').val()=='high') {
-	html+=' width="280" height="400"';
-    } else {
-	html+=' width="650" height="200"';
+    if (parseFloat($('#betrag').val())!=25) {
+	src= addParam(src, 'betrag='+$('#betrag').val());
     }
-    html+=' scrolling="no" frameborder="0"></iframe>';
-    return html;
+    return src;
 }
 
 function addParam(html, param) {
