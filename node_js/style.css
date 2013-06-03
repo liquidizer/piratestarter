@@ -26,9 +26,13 @@ a {
     font-weight:normal;
 }
 p.bold {
-    margin: 1ex 0 1ex 0;
+    line-hight: 80%;
+    margin: 3px 0 3px 0;
     font-weight:bold; 
     font-size:30px;
+}
+.high p.bold {
+    margin: 6px 0 6px 0;
 }
 
 /* GENERIC NEXT BUTTON */
