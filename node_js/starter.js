@@ -67,6 +67,9 @@ function processUrlParameters() {
     if (urlParamBG) {
 	if (urlParamBG[1].match(/^o/))
 	    $('#background').attr('src', 'img/bg-wide-orange.png');
+    } else {
+	if (myid=="PS-Homepage")
+	    $('#background').attr('src', 'img/bg-wide-orange.png');
     }
 }
 
