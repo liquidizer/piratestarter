@@ -24,7 +24,7 @@ var mimes= {
     eot: "application/vnd.ms-fontobject"
 }
 
-var btc= '1KvUzErYa3Y6QDpwLWnycwrLbrLA4imXrc';
+var btc= '1PiratenNb8U8sfLgw9aRjS11cLLfY4M9S';
 var btc_cache='?';
 
 // Generate validation code
