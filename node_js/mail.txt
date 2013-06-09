@@ -1,0 +1,13 @@
+Hallo ${NAME},
+
+vielen Dank für Deine Spende. Bitte überweise ${BETRAG}€ an
+
+Empfänger: PirateStarter
+Konto: 27264217
+BLZ: 70250150
+
+Verwendungszweck: ${TOKEN}
+
+Vielen Dank,
+Dein 
+   PirateStarter Team

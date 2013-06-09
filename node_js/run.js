@@ -86,6 +86,7 @@ function handleRequest(req, res) {
 	    callPsas('createUeberweisung', data, function () {
 		log('Sent to Psas.');
 	    });
+	    sendConfirmationMail('create?'+data);
 	    saveEncryptedFile("donation_"+generateCode(10), 
 			      timeStamp()+' createUeberweisung?'+data, 
 			      function(err) {
@@ -175,4 +176,25 @@ function encrypt(data, callback) {
     gpg.on('exit', function() { callback(crypt); });
     gpg.stdin.write(data);
     gpg.stdin.end();
+}
+
+function sendConfirmationMail(data) {
+    var query= url.parse(data, true).query;
+    if (query.mail) {
+	fs.readFile('mail.txt', function(err, body) {
+	    if (body) {
+		var data= body.toString();
+		data= data.replace(/\${NAME}/, query.name);
+		data= data.replace(/\${TOKEN}/, query.token);
+		data= data.replace(/\${BETRAG}/, query.betrag);
+
+		var mail= spawn('mail', ['-s','PirateStarter',query.mail]);
+		mail.stdout.on('data', function() {});
+		mail.stderr.on('data', function(msg) {console.log(msg.toString());});
+		mail.on('error', function(msg) {console.log(msg.toString());});
+		mail.stdin.write(data);
+		mail.stdin.end();
+	    }
+	});
+    }
 }
