@@ -103,6 +103,7 @@ p.bold {
 }
 
 .high #header .bar {
+    top: 14px;
     height: 33px;
 }
 .wide #header .bar {
