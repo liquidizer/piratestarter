@@ -2,7 +2,7 @@ Hallo ${NAME},
 
 vielen Dank für Deine Spende. Bitte überweise ${BETRAG}€ an
 
-Empfänger: PirateStarter
+Empfänger: www.PirateStarter.de
 Konto: 27264217
 BLZ: 70250150
 

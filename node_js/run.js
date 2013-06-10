@@ -188,7 +188,10 @@ function sendConfirmationMail(data) {
 		data= data.replace(/\${TOKEN}/, query.token);
 		data= data.replace(/\${BETRAG}/, query.betrag);
 
-		var mail= spawn('mail', ['-s','PirateStarter',query.mail]);
+		var mail= spawn('mail', ['-s','PirateStarter',
+					 '-aFrom:piratestarter@piratenpartei-bayern.de',
+					 '-aContent-Type: text/plain; charset="UTF-8"',
+					 ,query.mail]);
 		mail.stdout.on('data', function() {});
 		mail.stderr.on('data', function(msg) {console.log(msg.toString());});
 		mail.on('error', function(msg) {console.log(msg.toString());});
