@@ -240,24 +240,24 @@ input.restart:hover {
 
 /* PAGE3: Zahlungsart */
 #payUeberweisung {
-    width: 217px;
-    height: 99px;
+    width: 192px;
+    height: 55px;
     border: 0px;
     color: rgba(0,0,0,0);
     background: url(img/weis.png);
 }
 #payUeberweisung:hover {
-    background-position: 0 -99px;
+    background-position: 0 -54px;
 }
 #payLastschrift {
-    width: 217px;
-    height: 99px;
+    width: 166px;
+    height: 48px;
     border: 0px;
     color: rgba(0,0,0,0);
     background: url(img/last.png);
 }
 #payLastschrift:hover {
-    background-position: 0 -99px;
+    background-position: 0 -48px;
 }
 
 /* LASTSCHRIFT3: Ich bin einverstanden */

@@ -14,14 +14,13 @@ $(function() {
     });
     $('.backButton').click(function() {
 	pshistory.pop();
-	showPage(pshistory.pop(), "right", "left");
+	showPage(pshistory.pop() || "page1", "right", "left");
     });
     $('html').keyup(validatePage);
     $('html').click(validatePage);
     $('#currency').change(function() {
 	$('#betrag').val(($(this).val()=="eur") ? amount : localizeDecimal(amount/100, 4));
     });
-    showPage("page1", "init");
 });
 
 function initLayout() {
@@ -70,6 +69,12 @@ function processUrlParameters() {
     } else {
 	if (myid=="PS-Homepage")
 	    $('#background').attr('src', 'img/bg-wide-orange.png');
+    }
+    var urlParamStartPage= location.search.match('[?&]start=([^&]*)');
+    if (urlParamStartPage) {
+	showPage(urlParamStartPage[1], "init");
+    } else {
+	showPage("page1", "init");
     }
 }
 
@@ -147,6 +152,10 @@ function bitcoin3or4() {
     return ($('#btc_mid').val()=="") ? "bitcoin3" : "bitcoin4";
 }
 
+function paypal2or3() {
+    return ($('#pp_mid').val()=="") ? "paypal2" : "paypal3";
+}
+
 function init_lastschrift2() {
     var spender= $('#spender');
     if (spender.val()=="")
@@ -213,14 +222,20 @@ function init_bitcoin1() {
     bc.attr('href',bc.attr('href').replace(/amount=.*/,'amount='+betrag+'X8'));
 }
 
+function init_paypal3() {
+    var betrag= myFloat($('#betrag').val());
+    $('#pp_icon_amount').val(betrag);
+    $('#pp_icon_item_name').val('www.piratestarter.de '+token);
+}
+
 function initPsas() {
     $.get('/psas/getStatus', function(response) {
-	$('#sumDonations').text(localizeDecimal(getParam(response,'Spenden')));
-	$('#sumPromised').text(localizeDecimal(getParam(response,'Zusagen')));
+	$('.sumDonations').text(localizeDecimal(getParam(response,'Spenden')));
+	$('.sumPromised').text(localizeDecimal(getParam(response,'Zusagen')));
     });
     $.get('/getBitcoinStatus', function(response) {
 	var btc= parseFloat(response)/1e8;
-	$('#sumBitcoins').text(localizeDecimal(btc,4));
+	$('.sumBitcoins').text(localizeDecimal(btc,4));
     });
 }
 

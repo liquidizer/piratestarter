@@ -23,12 +23,12 @@
       <div class="text">
 	Bisher eingegangene Spenden:
 	<p class="bold">
-	  <span id="sumDonations">0,00</span>€
+	  <span class="sumDonations">-,--</span>€
 	  <br/>
 	  <div class="small">
-	    + <span id="sumPromised">0,00</span>€ offene Zusagen
+	    + <span class="sumPromised">-,--</span>€ offene Zusagen
 	    <br/>
-	    + <span id="sumBitcoins">0,00</span>BTC (Bitcoins)
+	    + <span class="sumBitcoins">-,--</span>BTC (Bitcoins)
 	  </div>
 	</p>
       </div>
@@ -82,14 +82,22 @@
 	<input type="button" class="backButton" value="zurueck"/>
       </div>
       <div class="text">
+	<p>
+	  Wie möchtest Du bezahlen?
+	</p>
 	<input type="button" class="nextButton" to="ueberweisen"
 	       id="payUeberweisung" value="Bezahlen per Ueberweisung"/>
-      </div>
-      <div class="text">
+	<br class="ifhigh"/>
 	<input type="button" class="nextButton" to="lastschrift"
 	       id="payLastschrift" value="Bezahlen per Lastschrift"/>
       </div>
+      <div class="text">
+	<div class="nextButton" to="paypal">
+	  PayPal
+	</div>
+      </div>
     </div>
+    <!-- Lastschrift -->
     <div class="page invalid" id="lastschrift">
       <div>
 	<input type="button" class="backButton" value="zurueck"/>
@@ -174,6 +182,7 @@
 	       value="Zurück zum Start" type="button"/>
       </div>
     </div>
+    <!-- Ueberweisen -->
     <div class="page" id="ueberweisen">
       <div>
 	<input type="button" class="backButton" value="zurueck"/>
@@ -243,6 +252,7 @@
 	       value="Zurück zum Start" type="button"/>
       </div>
     </div>
+    <!-- BITCOIN Donations -->
     <div class="page" id="bitcoin1">
       <div>
 	<input type="button" class="backButton" value="zurueck"/>
@@ -308,6 +318,76 @@
       <div class="text">
 	<input class="restart nextButton" to="page1"
 	       value="Zurück zum Start" type="button"/>
+      </div>
+    </div>
+    <!-- PAYPAL -->
+    <div class="page" id="paypal">
+      <div>
+	<input type="button" class="backButton" value="zurueck"/>
+      </div>
+      <div class="text">
+	<div class="kontotext">Mitgliedsnummer:</div>
+	<input id="pp_mid" name="mitgliedsnummer" class="px"/>
+	<div style="margin:0">
+	  und
+	</div>
+	<div class="kontotext">Email Adresse:</div>
+	<input id="pp_email" name="email" class="px"/>
+      </div>
+      <div class="text">
+	<input class="weiter nextButton" to="paypal2or3()"
+	       type="button" value="Weiter"/>
+      </div>
+    </div>
+    <div class="page" id="paypal2">
+      <div>
+	<input type="button" class="backButton" value="zurueck"/>
+      </div>
+      <div class="text">
+	Name des Spenders:<br/>
+	<input id="pp_spender" name="spender" class="px" data-required/>
+	<br/>
+	<span class="ifwide">
+	  <input id="pp_quittung" type="checkbox"/> Spendenbescheinigung
+	</span>
+      </div>
+      <div class="text">
+	Adresse:<br/>
+	<textarea id="pp_adresse" name="adresse" class="px" cols="15" rows="2" data-required></textarea>
+	<br/>
+	<span class="ifhigh">
+	  <input id="pp_quittung" type="checkbox"/> Spendenbescheinigung
+	</span>
+      </div>
+      <div class="text">
+	<input class="weiter nextButton" to="paypal3"
+	       type="button" value="Weiter"/>
+      </div>
+    </div>
+    <div class="page" id="paypal3">
+       <div class="text">
+	Du kannst nun <span name="betrag" type="input">?</span>€ bezahlen. 
+	<br/>
+	Folgender Token dient Dir zur Nachverfolgung
+	<br class="ifwide"/>
+	was mit deinem Geld geschehen ist:
+	<p class="bold">
+	  <span name="token" type="token">?</span> 
+	</p>
+      </div>
+      <div class="text">
+	<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
+	  <input type="hidden" name="amount" value="" id="pp_icon_amount">
+	  <input type="hidden" name="cmd" value="_donations">
+	  <input type="hidden" name="business" value="klaus.jaroslawsky@geldpiraten.de">
+	  <input type="hidden" name="lc" value="DE">
+	  <input type="hidden" name="item_name" value="www.piratestarter.de" id="pp_icon_item_name">
+	  <input type="hidden" name="no_note" value="0">
+	  <input type="hidden" name="currency_code" value="EUR">
+	  <input type="hidden" name="bn" value="PP-DonationsBF:btn_donateCC_LG.gif:NonHostedGuest">
+	  <input type="image" src="https://www.paypalobjects.com/de_DE/DE/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="Jetzt einfach, schnell und sicher online bezahlen – mit PayPal.">
+	  <img alt="" border="0" src="https://www.paypalobjects.com/de_DE/i/scr/pixel.gif" width="1" height="1">
+	</form>
       </div>
     </div>
   </body>
