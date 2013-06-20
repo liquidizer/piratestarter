@@ -6,17 +6,16 @@ $(function() {
 });
 
 function repaint() {
-    var html= getHtmlCode();
     $('#zweck_input').toggle($('#hasPurpose').val()=='yes');
-    $('#code').text(html);
+    $('#code').text(getHtmlCode());
     $('#dci').text(getDciCode());
     $('#uri').text(getSrc());
-    if ($('#iframe').html()!=html)
-	$('#iframe').html(html);
+    $('#iframe1').html(getHtmlCode(true));
+    $('#iframe2').html(getHtmlCode(true,'page2'));
 }
 
-function getHtmlCode() {
-    var html='<iframe src="'+getSrc()+'"';
+function getHtmlCode(isLocal, startPage) {
+    var html='<iframe src="'+getSrc(isLocal, startPage)+'"';
 
     if ($('#format').val()=='high') {
 	html+=' width="280" height="400"';
@@ -38,10 +37,17 @@ function getDciCode() {
     return code;
 };
 
-function getSrc() {
-    src='https://stuke9.piratenpartei-bayern.de/starter.html';
-    if ($('#kennung').val()) {
-	src= addParam(src, 'myid='+$('#kennung').val());
+function getSrc(isLocal, startPage) {
+    var src= 'starter.html';
+    if (!isLocal)
+	src= 'https://stuke9.piratenpartei-bayern.de/'+src;
+    if (startPage) {
+	src= addParam(src, 'start='+startPage);
+    }
+    var kennung= $('#kennung').val();
+    if (isLocal) kennung= 'builder-' + (kennung || 'undefined');
+    if (kennung) {
+	src= addParam(src, 'myid='+kennung);
     }
     if ($('#bg').val()=='orange') {
 	src= addParam(src,'bg=orange');

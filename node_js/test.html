@@ -6,9 +6,9 @@
     <script type="text/javascript" src="builder.js"></script>
     <style>
       body {
-      width:550px;
+      width:580px;
       }
-      div,iframe {
+      div {
       margin: 10px;
       }
       p, td {
@@ -22,6 +22,11 @@
       border:1px solid black; 
       background:white;
       width:500px
+      }
+      #iframe1, #iframe2 {
+      display: table;
+      float: left;
+      margin: 3px;
       }
     </style>
   </head>
@@ -105,9 +110,13 @@
       <div id="code" class="code"></div>
     </div>
 
-    <p>Hier ist eine Vorschau auf dein Applet. Es ist bereit zum Testen!</p>
-    <div id="iframe">
-      iframe goes here!
+    <p>Hier ist eine Vorschau auf die ersten beiden Seiten deines Applets. 
+      Es ist bereit zum Testen!</p>
+    <div id="iframe1">
+      page 1 preview
+    </div>
+    <div id="iframe2">
+      page 2 preview
     </div>
   </body>
 </html>
