@@ -45,6 +45,12 @@ function handleRequest(req, res) {
 	    res.end(data);
 	});
     } 
+    else if (urlParts.pathname=="/paypalcommit") {
+	getPostData(req, function(data) {
+	    log('Paypal commit');
+	    saveEncryptedFile("paypal_"+generateCode(10), data, function() {});
+	});
+    }
     else if (urlParts.pathname=="/getBitcoinStatus") {
 	var options= {
 	    host: 'blockchain.info',
@@ -118,7 +124,10 @@ function serveFile(res, filename) {
     }
     fs.readFile(filename, function(err, data) {
 	if (data) {
-	    res.writeHead(200, { 'Content-Type': mime || 'text/plain'});
+	    res.writeHead(200, { 
+		'Content-Type': mime,
+		'Cache-Control': 'max-age=3600'
+	    });
 	    res.end(data)
 	} else {
 	    res.writeHead(404, { 'Content-Type': 'text/plain' });
@@ -184,9 +193,9 @@ function sendConfirmationMail(data) {
 	fs.readFile('mail.txt', function(err, body) {
 	    if (body) {
 		var data= body.toString();
-		data= data.replace(/\${NAME}/, query.name);
-		data= data.replace(/\${TOKEN}/, query.token);
-		data= data.replace(/\${BETRAG}/, query.betrag);
+		data= data.replace(/\${NAME}/g, query.name);
+		data= data.replace(/\${TOKEN}/g, query.token);
+		data= data.replace(/\${BETRAG}/g, query.betrag);
 
 		var mail= spawn('mail', ['-s','PirateStarter',
 					 '-aFrom:piratestarter@piratenpartei-bayern.de',
