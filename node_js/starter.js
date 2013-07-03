@@ -226,9 +226,20 @@ function init_paypal3() {
     var betrag= myFloat($('#betrag').val());
     $('#pp_icon_amount').val(betrag);
     $('#pp_icon_item_name').val('www.piratestarter.de '+token);
-    var betrag= myFloat($('#betrag').val());
     var commission= betrag*0.012 + 0.35;
     $('#paypalcom').text(localizeDecimal(commission));
+
+    $.post('/createPaypal','token='+token +
+	   '&mnr='+encodeURI($('#pp_mid').val() || 0) +
+	   '&mail='+encodeURI($('#pp_email').val()) +
+	   '&zweck='+encodeURI($('#zweck').val()) +
+	   '&betrag='+encodeURI(betrag) +
+	   '&name='+encodeURI($('#pp_spender').val()) +
+	   '&adresse='+encodeURI($('#pp_adresse').val()) +
+	   '&bescheinigung='+encodeURI($('#pp_quittung').is(':checked')),
+	   function(response) {
+	       if (response!="OK") alert('Fehlgeschlagen');
+	   });
 }
 
 function initPsas() {

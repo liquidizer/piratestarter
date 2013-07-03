@@ -46,10 +46,16 @@ function handleRequest(req, res) {
 	});
     } 
     else if (urlParts.pathname=="/paypalcommit") {
-	getPostData(req, function(data) {
-	    log('Paypal commit');
-	    saveEncryptedFile("paypal_"+generateCode(10), data, function() {});
-	});
+	log('paypalcommit called');
+	if (req.method=='POST') {
+  	    getPostData(req, function(data) {
+	    	log('Paypal commit');
+	    	saveEncryptedFile("paypal_"+generateCode(10), data, function() {});
+		res.end();
+	    });
+	} else {
+	    res.end();
+	}
     }
     else if (urlParts.pathname=="/getBitcoinStatus") {
 	var options= {
@@ -95,6 +101,20 @@ function handleRequest(req, res) {
 	    sendConfirmationMail('create?'+data);
 	    saveEncryptedFile("donation_"+generateCode(10), 
 			      timeStamp()+' createUeberweisung?'+data, 
+			      function(err) {
+				  if (err) denyAccess("Error"); else res.end('OK');
+			      });
+	});
+    }
+    else if (urlParts.pathname=="/createPaypal") {
+	getPostData(req, function(data) {
+	    log('createPaypal');
+	    callPsas('createPaypal', data, function () {
+		log('Sent to Psas.');
+	    });
+	    sendConfirmationMail('create?'+data);
+	    saveEncryptedFile("donation_"+generateCode(10), 
+			      timeStamp()+' createPaypal?'+data, 
 			      function(err) {
 				  if (err) denyAccess("Error"); else res.end('OK');
 			      });
