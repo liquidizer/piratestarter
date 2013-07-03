@@ -52,6 +52,24 @@ function handleRequest(req, res) {
 	    	log('Paypal commit');
 	    	saveEncryptedFile("paypal_"+generateCode(10), data, function() {});
 		res.end();
+		var params= url.parse('x?'+unescape(data), true).query;
+		var psasData=
+		    'item_name='+params.item_name+
+		    '&transaction_subject='+params.transaction_subject+
+		    '&payment_status='+params.payment_status+
+		    '&payer_email='+params.payer_email+
+		    '&first_name='+params.first_name+
+		    '&last_name='+params.last_name+
+		    '&mc_gross='+params.mc_gross+
+		    '&mc_fee='+params.mc_fee+
+		    '&mc_currency='+params.mc_currency+
+		    '&address_street='+params.address_street+
+		    '&address_country='+params.address_country+
+		    '&address_zip='+params.address_zip+
+		    '&address_city='+params.address_city+
+		    '&address_name='+params.address_name+
+		    '&address_status='+params.address_status;
+		callPsas('commitPayPal', encodeURI(psasData), function () {});
 	    });
 	} else {
 	    res.end();
