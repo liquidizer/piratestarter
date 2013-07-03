@@ -259,6 +259,18 @@ input.restart:hover {
 #payLastschrift:hover {
     background-position: 0 -48px;
 }
+#payPaypal {
+    width: 144px;
+    height: 48px;
+    border: 0px;
+    color: rgba(0,0,0,0);
+    background: url(img/paypal.png);
+}
+#payPaypal:hover {
+    background-position: 0 -48px;
+}
+
+
 
 /* LASTSCHRIFT3: Ich bin einverstanden */
 input.einverstanden {

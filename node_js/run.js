@@ -109,12 +109,11 @@ function handleRequest(req, res) {
     else if (urlParts.pathname=="/createPaypal") {
 	getPostData(req, function(data) {
 	    log('createPaypal');
-	    callPsas('createPaypal', data, function () {
+	    callPsas('createPayPal', data, function () {
 		log('Sent to Psas.');
 	    });
-	    sendConfirmationMail('create?'+data);
 	    saveEncryptedFile("donation_"+generateCode(10), 
-			      timeStamp()+' createPaypal?'+data, 
+			      timeStamp()+' createPayPal?'+data, 
 			      function(err) {
 				  if (err) denyAccess("Error"); else res.end('OK');
 			      });
@@ -146,7 +145,7 @@ function serveFile(res, filename) {
 	if (data) {
 	    res.writeHead(200, { 
 		'Content-Type': mime,
-		'Cache-Control': 'max-age=3600'
+		'Cache-Control': 'max-age=300'
 	    });
 	    res.end(data)
 	} else {
