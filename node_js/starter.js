@@ -226,6 +226,9 @@ function init_paypal3() {
     var betrag= myFloat($('#betrag').val());
     $('#pp_icon_amount').val(betrag);
     $('#pp_icon_item_name').val('www.piratestarter.de '+token);
+    var betrag= myFloat($('#betrag').val());
+    var commission= betrag*0.012 + 0.35;
+    $('#paypalcom').text(localizeDecimal(commission));
 }
 
 function initPsas() {
