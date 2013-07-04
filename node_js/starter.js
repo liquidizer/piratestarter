@@ -39,6 +39,25 @@ function initLayout() {
 	$(elt).append($('#'+$(elt).attr('data-replace')));
     });
     $('#background').attr('width',width).attr('height',height);   
+    initCheckBoxes();
+}
+
+function initCheckBoxes() {
+    $('input.janein + label')
+	.click(function() {$(this).prev().click();})
+	.hover(function() {$(this).prev().addClass('hover');},
+	      function() {$(this).prev().removeClass('hover');});
+    $('#anonym').change(function() {
+	if ($('#anonym')[0].checked) {
+	    $('#mitsteuer')[0].checked= false;
+	    $('#mitbotschaft')[0].checked= false;
+	}
+    });
+    $('#mitbotschaft,#mitsteuer').change(function() {
+	if ($('#mitbotschaft')[0].checked || $('#mitsteuer')[0].checked) {
+	    $('#anonym')[0].checked= false;
+	}
+    });
 }
 
 function processUrlParameters() {
@@ -144,16 +163,11 @@ function init_page2() {
 	$.get('/createToken?myid='+myid, function(msg) { token= msg; });
 }
 
-function page3orBtc() {
-    return ($('#currency').val()=="eur") ? "page3" : "bitcoin1";
-}
-
-function bitcoin3or4() {
-    return ($('#btc_mid').val()=="") ? "bitcoin3" : "bitcoin4";
-}
-
-function paypal2or3() {
-    return ($('#pp_mid').val()=="") ? "paypal2" : "paypal3";
+function pageTransferOrBtc() {
+    if ($('#anonym').is(':checked'))
+	return ($('#currency').val()=="eur") ? "ueberweisen" : "bitcoin4";
+    else
+	return "page4";
 }
 
 function init_lastschrift2() {
@@ -162,27 +176,26 @@ function init_lastschrift2() {
 	spender.val($('#inhaber').val());
 }
 
-function ueberweisen2or3() {
-    return $('#uw_mid').val()!="" ? "ueberweisen_danke" : "ueberweisen2";
+function page5or4a() {
+    console.log($('#mid').val());
+    return $('#mid').val()=="" ? "page4a" : page5orBtc();
 }
-
-function lastschrift3or4() {
-    console.log($('#ls_mid').val()!="" ? "lastschrift3" : "lastschrift2a");
-    return $('#ls_mid').val()!="" ? "lastschrift3" : "lastschrift2a";
+function page5orBtc() {
+    return ($('#currency').val()=="eur") ? "page5" : "bitcoin4";
 }
 
 function init_lastschrift_danke() {
     $.post('createLastschrift','token='+token +
 	   '&name='+encodeURI($('#spender').val()) +
-	   '&mnr='+encodeURI($('#ls_mid').val() || 0) +
+	   '&mnr='+encodeURI($('#mid').val() || 0) +
 	   '&mail=' +
 	   '&betrag='+encodeURI(myFloat($('#betrag').val()))+
 	   '&inhaber='+encodeURI($('#inhaber').val()) +
 	   '&kto='+encodeURI($('#konto').val()) +
 	   '&blz='+encodeURI($('#blz').val()) +
 	   '&zweck='+encodeURI($('#zweck').val()) +
-	   '&adresse='+encodeURI($('#ls_adresse').val()) +
-	   '&bescheinigung='+encodeURI($('#ls_quittung').is(':checked')), 
+	   '&adresse='+encodeURI($('#adresse').val()) +
+	   '&bescheinigung='+encodeURI($('#mitsteuer').is(':checked')), 
 	   function(response) {
 	       if (response!="OK") alert('Fehlgeschlagen');
 	   });
@@ -190,13 +203,13 @@ function init_lastschrift_danke() {
 
 function init_ueberweisen_danke() {
     $.post('/createUeberweisung','token='+token +
-	   '&mnr='+encodeURI($('#uw_mid').val() || 0) +
-	   '&mail='+encodeURI($('#uw_email').val()) +
+	   '&mnr='+encodeURI($('#mid').val() || 0) +
+	   '&mail='+encodeURI($('#email').val()) +
 	   '&zweck='+encodeURI($('#zweck').val()) +
 	   '&betrag='+encodeURI(myFloat($('#betrag').val())) +
-	   '&name='+encodeURI($('#uw_spender').val()) +
-	   '&adresse='+encodeURI($('#uw_adresse').val()) +
-	   '&bescheinigung='+encodeURI($('#uw_quittung').is(':checked')),
+	   '&name='+encodeURI($('#spender').val()) +
+	   '&adresse='+encodeURI($('#adresse').val()) +
+	   '&bescheinigung='+encodeURI($('#mitsteuer').is(':checked')),
 	   function(response) {
 	       if (response!="OK") alert('Fehlgeschlagen');
 	   });
@@ -204,12 +217,12 @@ function init_ueberweisen_danke() {
 
 function init_bitcoin4() {
     $.post('/createBitcoinSpende','token='+token +
-	   '&mnr='+encodeURI($('#btc_mid').val() || 0) +
+	   '&mnr='+encodeURI($('#mid').val() || 0) +
 	   '&zweck='+ encodeURI($('#zweck').val()) +
 	   '&betrag='+encodeURI(myFloat($('#betrag').val())) +
 	   '&name=' +
 	   '&adresse='+encodeURI($('#btc_identity').val()) +
-	   '&bescheinigung='+encodeURI($('#btc_quittung').is(':checked')) +
+	   '&bescheinigung='+encodeURI($('#mitsteuer').is(':checked')) +
 	   '&btcfrom=' + encodeURI($('#btc_from').val()),
 	   function(response) {
 	       if (response!="OK") alert('Fehlgeschlagen');
