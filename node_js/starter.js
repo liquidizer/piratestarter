@@ -224,7 +224,7 @@ function init_bitcoin1() {
 
 function init_paypal3() {
     var betrag= myFloat($('#betrag').val());
-    var zweck= $('#zweck').val();
+    var zweck= $('#zweck option').filter(':selected').text();
     $('#pp_icon_amount').val(betrag);
     $('#pp_icon_item_name').val('www.piratestarter.de '+token+' '+zweck);
     var commission= betrag*0.012 + 0.35;
