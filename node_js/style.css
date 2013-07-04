@@ -69,7 +69,7 @@ p.bold {
 .wide .page > div {
     display: table;
     float: left;
-    margin: 0 0.5em 0 0.5em;
+    margin: 0 0 0 0.8em;
 }
 
 /* FORM FORMAT */
@@ -179,6 +179,31 @@ input.restart:hover {
     background-position: 0 -113px;
 }
 
+/* JA-NEIN BUTTON */
+input.janein { display: none}
+input.janein + label{
+    width: 125px;
+    height: 35px;
+    display: inline-block;
+    background: url(img/janein.png) 0 0px;
+    border: 0px;
+    color: rgba(0,0,0,0);
+   background-position: 0 -8px;
+}
+input.janein:checked + label {
+    background-position: 0 -56px;
+}
+input.janein.hover + label {
+    background-position: 0 -104px;
+}
+input.janein.hover:checked + label {
+    background-position: 0 -152px;
+}
+.wide table.wiespenden {
+    position: relative;
+    top: -15px;
+}
+
 /* PAGE1: jetzt spenden */
 #jetztSpenden {
     width: 226px;
@@ -194,7 +219,7 @@ input.restart:hover {
     position: relative;
     top: -15px;
 }
-.wide #page1 .text {
+.wide .wideindent {
     margin: 0 0 0 50px;
 }
 
@@ -235,7 +260,7 @@ input.restart:hover {
     background-position: 0 -129px;
 }
 .high .text {
-    margin: 1em 1em 1em 1em;
+    margin: 0.5em 1em 0.5em 1em;
 }
 
 /* PAGE3: Zahlungsart */

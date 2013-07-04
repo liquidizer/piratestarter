@@ -7,11 +7,6 @@
     <script type="text/javascript" src="jquery-latest.min.js"></script>
     <script type="text/javascript" src="jquery-ui-git.js"></script>
     <script type="text/javascript" src="starter.js"></script>
-    <style>
-      .page {
-      display: none;
-      }
-    </style>
   </head>
   <body>
     <img id="background" src=""/>
@@ -34,7 +29,9 @@
 	      </p>
 	      <br/>
 	      <a href="https://twitter.com/GeldPirat" class="twitter-follow-button" data-show-count="false" data-lang="en">Follow</a>
+	      <!--
 	      <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+	      -->
 	    </td>
 	  </tr>
 	  <tr>
@@ -44,13 +41,11 @@
 	  </tr>
 	</table>
       </div>
-      <div class="text">
-	<input type="button" class="nextButton" to="page2"
-	       id="jetztSpenden" value="jetzt spenden"/>
-      </div>
+      <input type="button" class="nextButton" to="page2"
+	     id="jetztSpenden" value="jetzt spenden"/>
     </div>
     <div id="page1_old" class="page">
-      <div class="text">
+      <div class="text wideindent">
 	Bisher eingegangene Spenden:
 	<p class="bold">
 	  <span class="sumDonations">-,--</span>€
@@ -103,11 +98,71 @@
 	</table>
       </div>
       <div class="text">
-	<input type="button" class="nextButton" to="page3orBtc()"
+	<input type="button" class="nextButton" to="page3"
 	       id="jetztBezahlen" value="Weiter zur Bezahlung"/>
       </div>
     </div>
-    <div class="page" id="page3">
+    <div id="page3" class="page">
+      <div>
+	<input type="button" class="backButton" value="zurueck"/>
+      </div>
+      <div class="text">
+	<table class="wiespenden">
+	  <tr>
+	    <td>
+	      Anonym bleiben?
+	    </td>
+	    <td><input id="anonym" type="checkbox" class="janein"/><label></label></td>
+	  </tr>
+	  <tr>
+	    <td>Steuerlich anerkennen?</td>
+	    <td><input id="mitsteuer" type="checkbox" class="janein" checked="true"/><label></label></td>
+	  </tr>
+	  <tr>
+	    <td>Botschaft bewerben?</td>
+	    <td><input id="mitbotschaft" type="checkbox" class="janein" checked="true"/><label></label></td>
+	  </tr>
+	</table>
+      </div>
+      <div class="text">
+	<input type="button" class="nextButton" to="pageTransferOrBtc()"
+	       id="jetztBezahlen" value="Weiter zur Bezahlung"/>
+      </div>
+    </div>
+    <div class="page invalid" id="page4">
+      <div>
+	<input type="button" class="backButton" value="zurueck"/>
+      </div>
+      <div class="text">
+	Email:<br/>
+	<p class="ifwide"></p>
+	<input id="email" name="email" class="px" data-required/>
+      </div>
+      <div class="text">
+	Mitgliedsnummer:<br/>
+	(falls zur Hand)<br/>
+	<input id="mid" name="mitglied" class="px2"/>
+      </div>
+      <div class="text">
+	<input class="weiter nextButton" to="page5or4a()"
+	       type="button" value="Weiter"/>
+      </div>
+    </div>
+    <div class="page" id="page4a">
+      <div>
+	<input type="button" class="backButton" value="zurueck"/>
+      </div>
+      <div class="text">
+	Name:<br class="ifhigh"/><input type="input" id="spender"/><br/>
+        Adresse:<br class="ifhigh"/>  
+	<textarea id="adresse" name="adresse" class="px" cols="15" rows="2" data-required></textarea>
+      </div>
+      <div class="text">
+	<input class="weiter nextButton" to="page5orBtc()"
+	       type="button" value="Weiter"/>
+      </div>
+    </div>
+    <div class="page" id="page5">
       <div>
 	<input type="button" class="backButton" value="zurueck"/>
       </div>
@@ -121,7 +176,7 @@
 	<input type="button" class="nextButton" to="lastschrift"
 	       id="payLastschrift" value="Bezahlen per Lastschrift"/>
 	<br class="ifhigh"/>
-	<input type="button" class="nextButton" to="paypal"
+	<input type="button" class="nextButton" to="paypal3"
 	       id="payPaypal" value="Bezahlen per Lastschrift"/>
 	<br class="ifhigh"/>
       </div>
@@ -140,41 +195,8 @@
 	<input id="blz" name="blz" class="px" data-required/><br/>
       </div>
       <div class="text">
-	 <input class="weiter nextButton" to="lastschrift2"
+	 <input class="weiter nextButton" to="lastschrift3"
 		type="button" value="Weiter"/>
-      </div>
-    </div>
-    <div class="page" id="lastschrift2">
-      <div>
-	<input type="button" class="backButton" value="zurueck"/>
-      </div>
-      <div class="text">
-	Mitgliedsnummer:<br/>
-	(falls zur Hand)<br/>
-	<input id="ls_mid" name="mitglied" class="px2"/>
-      </div>
-      <div class="text">
-	Spendername:<br/>
-	<p class="ifwide"></p>
-	<input id="spender" name="spender" class="px"/>
-      </div>
-      <div class="text">
-	<input class="weiter nextButton" to="lastschrift3or4()"
-	       type="button" value="Weiter"/>
-      </div>
-    </div>
-    <div class="page" id="lastschrift2a">
-      <div>
-	<input type="button" class="backButton" value="zurueck"/>
-      </div>
-      <div class="text">
-	Name: <span type="input" name="spender">?</span><br/>
-        Adresse:<br/>  
-	<textarea id="ls_adresse" name="adresse" class="px" cols="15" rows="2" data-required></textarea>
-      </div>
-      <div class="text">
-	<input class="weiter nextButton" to="lastschrift3"
-	       type="button" value="Weiter"/>
       </div>
     </div>
     <div class="page" id="lastschrift3">
@@ -186,9 +208,6 @@
 	für <span name="zweck" type="select">?</span> 
 	<br class="ifwide">
 	von Deinem Konto ab.
-	<p/>
-	<input id="ls_quittung" type="checkbox"/>
-	Spendenbescheinigung
       </div>
       <div class="text">
 	<input class="einverstanden nextButton" to="lastschrift_danke"
@@ -213,49 +232,6 @@
     </div>
     <!-- Ueberweisen -->
     <div class="page" id="ueberweisen">
-      <div>
-	<input type="button" class="backButton" value="zurueck"/>
-      </div>
-      <div class="text">
-	<div class="kontotext">Mitgliedsnummer:</div>
-	<input id="uw_mid" name="mitgliedsnummer" class="px"/>
-	<div style="margin:0">
-	  und
-	</div>
-	<div class="kontotext">Email Adresse:</div>
-	<input id="uw_email" name="email" class="px"/>
-      </div>
-      <div class="text">
-	<input class="weiter nextButton" to="ueberweisen2or3()"
-	       type="button" value="Weiter"/>
-      </div>
-    </div>
-    <div class="page invalid" id="ueberweisen2" init="initCode">
-      <div>
-	<input type="button" class="backButton" value="zurueck"/>
-      </div>
-      <div class="text">
-	Name des Spenders:<br/>
-	<input id="uw_spender" name="spender" class="px" data-required/>
-	<br/>
-	<span class="ifwide">
-	  <input id="uw_quittung" type="checkbox"/> Spendenbescheinigung
-	</span>
-      </div>
-      <div class="text">
-	Adresse:<br/>
-	<textarea id="uw_adresse" name="adresse" class="px" cols="15" rows="2" data-required></textarea>
-	<br/>
-	<span class="ifhigh">
-	  <input id="uw_quittung" type="checkbox"/> Spendenbescheinigung
-	</span>
-      </div>
-      <div class="text">
-	<input class="weiter nextButton" to="ueberweisen_danke"
-	       type="button" value="Weiter"/>
-      </div>
-    </div>
-    <div class="page" id="ueberweisen_danke" init="initCode">
       <div class="text">
 	<span class="small">
 	  Danke für Deine Spende. 
@@ -264,7 +240,7 @@
 	</span>
 	<p class="ifhigh"></p>
 	<br class="ifwide"/>
-	Empfänger: www.piratestarter.de<br/>
+	Empfänger: piratestarter.de<br/>
 	Konto: 27264217<br/>
 	BLZ: 70250150 <span class="small">(KSK MSE)</span>
       </div>
@@ -282,38 +258,6 @@
       </div>
     </div>
     <!-- BITCOIN Donations -->
-    <div class="page" id="bitcoin1">
-      <div>
-	<input type="button" class="backButton" value="zurueck"/>
-      </div>
-      <div class="text">
-	Wenn wir deine Identität<br/>kennen, bekommen wir<br/>staatlichen Zuschuss.
-      </div>
-      <div class="text nextButton" to="bitcoin4">
-	Ich möchte<br/>anonym<br class="ifwide"/> bleiben.
-      </div>
-      <div class="text nextButton" to="bitcoin2">
-	Ich möchte<br/>meine Identität<br class="ifwide"/> angeben.
-      </div>
-    </div>
-    <div class="page invalid" id="bitcoin2">
-      <div class="text">
-	<input type="button" class="backButton" value="zurueck"/>
-      </div>
-      <div class="text">
-	<div class="kontotext">Dein Bitcoin-Konto:</div>
-	<input id="btc_from" name="btc_from" class="px" data-required/>
-	<br/>
-	<div class="kontotext">Mitgliedsnummer<br/>(falls vorhanden):</div>
-	<input id="btc_mid" name="mitgliedsnummer" class="px"/>
-	<br/>
-	<input id="btc_quittung" type="checkbox"/> Spendenbescheinigung
-      </div>
-      <div class="text">
-	<input class="weiter nextButton" to="bitcoin3or4()"
-	       type="button" value="Weiter"/>
-      </div>
-    </div>
     <div class="page invalid" id="bitcoin3">
       <div class="text">
 	<input type="button" class="backButton" value="zurueck"/>
@@ -350,49 +294,6 @@
       </div>
     </div>
     <!-- PAYPAL -->
-    <div class="page" id="paypal">
-      <div>
-	<input type="button" class="backButton" value="zurueck"/>
-      </div>
-      <div class="text">
-	<div class="kontotext">Mitgliedsnummer:</div>
-	<input id="pp_mid" name="mitgliedsnummer" class="px"/>
-	<div style="margin:0">
-	  und
-	</div>
-	<div class="kontotext">Email Adresse:</div>
-	<input id="pp_email" name="email" class="px"/>
-      </div>
-      <div class="text">
-	<input class="weiter nextButton" to="paypal2or3()"
-	       type="button" value="Weiter"/>
-      </div>
-    </div>
-    <div class="page" id="paypal2">
-      <div>
-	<input type="button" class="backButton" value="zurueck"/>
-      </div>
-      <div class="text">
-	Name des Spenders:<br/>
-	<input id="pp_spender" name="spender" class="px" data-required/>
-	<br/>
-	<span class="ifwide">
-	  <input id="pp_quittung" type="checkbox"/> Spendenbescheinigung
-	</span>
-      </div>
-      <div class="text">
-	Adresse:<br/>
-	<textarea id="pp_adresse" name="adresse" class="px" cols="15" rows="2" data-required></textarea>
-	<br/>
-	<span class="ifhigh">
-	  <input id="pp_quittung" type="checkbox"/> Spendenbescheinigung
-	</span>
-      </div>
-      <div class="text">
-	<input class="weiter nextButton" to="paypal3"
-	       type="button" value="Weiter"/>
-      </div>
-    </div>
     <div class="page" id="paypal3">
        <div class="text">
 	Du kannst nun <span name="betrag" type="input">?</span>€ bezahlen. 
