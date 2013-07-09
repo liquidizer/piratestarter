@@ -62,14 +62,23 @@ function processUrlParameters() {
 	amount= parseFloat(urlParamBetrag[1]);
 	$('#betrag').val(urlParamBetrag[1]);
     }
-    var urlParamBG= location.search.match('[?&]bg=([^&]*)');
-    if (urlParamBG) {
-	if (urlParamBG[1].match(/^o/))
-	    $('#background').attr('src', 'img/bg-wide-orange.png');
-    } else {
-	if (myid=="PS-Homepage")
-	    $('#background').attr('src', 'img/bg-wide-orange.png');
-    }
+    $('#background').attr('src', function() {
+	var urlParamBG= location.search.match('[?&]bg=([^&]*)');
+	if (urlParamBG) {
+	    if (urlParamBG[1].match(/^o/))
+		return 'img/bg-wide-orange.png';
+	    else if (urlParamBG[1].match(/^w/))
+		return '';
+	    else
+		return 'img/bg-wide-blue.png';
+
+	} else {
+	    if (myid=="PS-Homepage")
+		return 'img/bg-wide-orange.png';
+	    else 
+		return 'img/bg-wide-blue.png';
+	}
+    }());
     var urlParamStartPage= location.search.match('[?&]start=([^&]*)');
     if (urlParamStartPage) {
 	showPage(urlParamStartPage[1], "init");

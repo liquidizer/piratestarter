@@ -49,8 +49,8 @@ function getSrc(isLocal, startPage) {
     if (kennung) {
 	src= addParam(src, 'myid='+kennung);
     }
-    if ($('#bg').val()=='orange') {
-	src= addParam(src,'bg=orange');
+    if ($('#bg').val()!='blue') {
+	src= addParam(src,'bg='+$('#bg').val());
     }
     if ($('#hasPurpose').val()=='yes') {
 	var zwecke= $('#zwecke').val()
