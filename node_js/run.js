@@ -1,5 +1,6 @@
 process.chdir("/var/www/piratestarter/node_js");
 var http = require('http');
+var https = require('https');
 var spawn= require('child_process').spawn;
 var callPsas= require('./psas').callPsas;
 var fs = require('fs');
@@ -26,6 +27,7 @@ var mimes= {
 
 var btc= '1PiratenNb8U8sfLgw9aRjS11cLLfY4M9S';
 var btc_cache='?';
+var twtCache={};
 
 // Generate validation code
 function generateCode(len) {
@@ -89,6 +91,32 @@ function handleRequest(req, res) {
 	    });
 	}).on('error', function(e) { res.end(btc_cache); });
     } 
+    else if (urlParts.pathname=="/getBotschaft") {
+	callPsas('getBotschaft', '', function (data) {
+	    res.end(data);
+	});
+    }
+    else if (urlParts.pathname=="/getTwitterImg") {
+	var name= urlParts.query['name'];
+	if (twtCache[name]) {
+	    res.end(twtCache[name]);
+	} else {
+	    var options= {
+		host: 'twitter.com',
+		path: '/'+name
+	    };
+	    var con=https.request(options, function(red) {
+		var data='';
+		red.on('data', function(chunk) { data+=chunk.toString(); });
+		red.on('end', function() {
+		    var img= data.match(/src=\"(https:\/\/si0.twimg.com\/profile_images\/[^\"]*)/)[1];
+		    twtCache[name]=img;
+		    res.end(img);
+		});
+	    }).on('error', function(e) { res.end(e); });
+	    con.end();
+	}
+    }
     else if (urlParts.pathname=="/createToken") {
 	var myid= urlParts.query.myid;
 	callPsas('createToken','kennung='+myid,function(result) {
