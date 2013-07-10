@@ -4,7 +4,6 @@ var myid= undefined;
 var amount= 25;
 
 $(function() {
-    initPsas();
     initLayout();
     processUrlParameters();
     $('.nextButton').click(function(evt) { 
@@ -14,7 +13,7 @@ $(function() {
     });
     $('.backButton').click(function() {
 	pshistory.pop();
-	showPage(pshistory.pop() || "page1", "right", "left");
+	showPage(pshistory.pop() || "page1_plain", "right", "left");
     });
     $('html').keyup(validatePage);
     $('html').click(validatePage);
@@ -102,7 +101,10 @@ function processUrlParameters() {
     if (urlParamStartPage) {
 	showPage(urlParamStartPage[1], "init");
     } else {
-	showPage("page1", "init");
+	if (Math.random()>0.5)
+	    showPage("page1_plain", "init");
+	else
+	    showPage("page1_twitter", "init");
     }
 }
 
@@ -163,8 +165,34 @@ function betragMehr(factor) {
 	$('#betrag').val(localizeDecimal(newVal,4));
 }
 
-function init_page1() {
-    token= undefined;
+function init_page1_twitter() {
+    initStatus(false);
+
+    $.get('/getBotschaft', function(msg) {
+	var twitter= getParam(msg, 'TwitterName').replace(/^@/,'');
+	var text= getParam(msg, 'Spruch');
+	$('#spruch').text(text);
+	$('#follow').attr('href','https://twitter.com/'+twitter);
+	$('#twtlink').attr('href','https://twitter.com/'+twitter);
+	// twitter include code
+	!function(d,s,id){
+	    var js,fjs=d.getElementsByTagName(s)[0],
+	    p=/^http:/.test(d.location)?'http':'https';
+	    if(!d.getElementById(id)){
+		js=d.createElement(s);
+		js.id=id;js.src=p+'://platform.twitter.com/widgets.js';
+		fjs.parentNode.insertBefore(js,fjs);
+	    }
+	}
+	(document, 'script', 'twitter-wjs');
+	$.get('/getTwitterImg?name='+twitter, function(msg) {
+	    $('#twtimg').attr('src', msg);
+	});
+    });
+}
+
+function init_page1_plain() {
+    initStatus(true);
 }
 
 function init_page2() {
@@ -190,7 +218,8 @@ function page5or4a() {
     return $('#mid').val()=="" ? "page4a" : page5orBtc();
 }
 function page5orBtc() {
-    return ($('#currency').val()=="eur") ? "page5" : "bitcoin4";
+    return ($('#currency').val()=="eur") ? "page5" : 
+	($('#mitsteuer').is(':checked') ? "bitcoin3" : "bitcoin4");
 }
 
 function init_lastschrift_danke() {
@@ -265,15 +294,18 @@ function init_paypal3() {
 	   });
 }
 
-function initPsas() {
+function initStatus(doBitcoins) {
+    token= undefined;
     $.get('/psas/getStatus', function(response) {
 	$('.sumDonations').text(localizeDecimal(getParam(response,'Spenden')));
 	$('.sumPromised').text(localizeDecimal(getParam(response,'Zusagen')));
     });
-    $.get('/getBitcoinStatus', function(response) {
-	var btc= parseFloat(response)/1e8;
-	$('.sumBitcoins').text(localizeDecimal(btc,4));
-    });
+    if (doBitcoins) {
+	$.get('/getBitcoinStatus', function(response) {
+	    var btc= parseFloat(response)/1e8;
+	    $('.sumBitcoins').text(localizeDecimal(btc,4));
+	});
+    }
 }
 
 function localizeDecimal(x, digits) {

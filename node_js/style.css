@@ -204,6 +204,11 @@ input.janein.hover:checked + label {
     top: -15px;
 }
 
+/* TWITTER SPRUCH */
+.wide #spruch {
+    width:300px;
+}
+
 /* PAGE1: jetzt spenden */
 #jetztSpenden {
     width: 226px;
