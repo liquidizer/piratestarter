@@ -101,7 +101,7 @@ function processUrlParameters() {
     if (urlParamStartPage) {
 	showPage(urlParamStartPage[1], "init");
     } else {
-	if (Math.random()>0.5)
+	if (Math.random()<0.8)
 	    showPage("page1_plain", "init");
 	else
 	    showPage("page1_twitter", "init");
@@ -226,7 +226,7 @@ function init_lastschrift_danke() {
     $.post('createLastschrift','token='+token +
 	   '&name='+encodeURI($('#spender').val()) +
 	   '&mnr='+encodeURI($('#mid').val() || 0) +
-	   '&mail=' +
+	   '&mail='+encodeURI($('#email').val()) +
 	   '&betrag='+encodeURI(myFloat($('#betrag').val()))+
 	   '&inhaber='+encodeURI($('#inhaber').val()) +
 	   '&kto='+encodeURI($('#konto').val()) +
@@ -239,7 +239,8 @@ function init_lastschrift_danke() {
 	   });
 }
 
-function init_ueberweisen_danke() {
+function init_ueberweisen() {
+    console.log('ueberweisen');
     $.post('/createUeberweisung','token='+token +
 	   '&mnr='+encodeURI($('#mid').val() || 0) +
 	   '&mail='+encodeURI($('#email').val()) +
@@ -258,10 +259,10 @@ function init_bitcoin4() {
 	   '&mnr='+encodeURI($('#mid').val() || 0) +
 	   '&zweck='+ encodeURI($('#zweck').val()) +
 	   '&betrag='+encodeURI(myFloat($('#betrag').val())) +
-	   '&name=' +
-	   '&adresse='+encodeURI($('#btc_identity').val()) +
+	   '&name='+encodeURI($('#spender').val()) +
+	   '&adresse='+encodeURI($('#adresse').val()) +
 	   '&bescheinigung='+encodeURI($('#mitsteuer').is(':checked')) +
-	   '&btcfrom=' + encodeURI($('#btc_from').val()),
+	   '&btcfrom=' + encodeURI($('#btc_identity').val()),
 	   function(response) {
 	       if (response!="OK") alert('Fehlgeschlagen');
 	   });
@@ -282,13 +283,13 @@ function init_paypal3() {
     $('#paypalcom').text(localizeDecimal(commission));
 
     $.post('/createPaypal','token='+token +
-	   '&mnr='+encodeURI($('#pp_mid').val() || 0) +
-	   '&mail='+encodeURI($('#pp_email').val()) +
+	   '&mnr='+encodeURI($('#mid').val() || 0) +
+	   '&mail='+encodeURI($('#email').val()) +
 	   '&zweck='+encodeURI($('#zweck').val()) +
 	   '&betrag='+encodeURI(betrag) +
-	   '&name='+encodeURI($('#pp_spender').val()) +
-	   '&adresse='+encodeURI($('#pp_adresse').val()) +
-	   '&bescheinigung='+encodeURI($('#pp_quittung').is(':checked')),
+	   '&name='+encodeURI($('#spender').val()) +
+	   '&adresse='+encodeURI($('#adresse').val()) +
+	   '&bescheinigung='+encodeURI($('#mitsteuer').is(':checked')),
 	   function(response) {
 	       if (response!="OK") alert('Fehlgeschlagen');
 	   });

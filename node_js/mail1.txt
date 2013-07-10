@@ -1,0 +1,18 @@
+Hallo ${NAME},
+
+vielen Dank für Deine Spendenzusage. Falls noch nicht geschehen, bitte überweise ${BETRAG}€ an
+
+Empfänger: www.piratestarter.de
+Konto: 27264217
+BLZ: 70250150
+Verwendungszweck: ${TOKEN}
+
+Du kannst deine Spende unter folgender Adresse verfolgen:
+http://www.piratestarter.de/antrage/was-ist-aus-meiner-spende-geworden/?t=${TOKEN}
+
+Falls Du eine Botschaft auf dem Spenden-Applet bewerben möchtest dann klicke hier: 
+http://www.piratestarter.de/meine-angaben/?l=${MESSAGETOKEN}
+
+Vielen Dank,
+Dein 
+   PirateStarter Team

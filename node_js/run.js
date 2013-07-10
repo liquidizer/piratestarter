@@ -128,8 +128,9 @@ function handleRequest(req, res) {
     else if (urlParts.pathname=="/createLastschrift") {
 	getPostData(req, function(data) {
 	    log('createLastschrift');
-	    callPsas('createLastschrift', data, function () {
-		log('Sent to Psas.');
+	    callPsas('createLastschrift', data, function (psas) {
+		var link= getXMLParam(psas, 'Link');
+		sendConfirmationMail('create?'+data, link, 'mail2.txt');
 	    });
 	    saveEncryptedFile("donation_"+generateCode(10), 
 			      timeStamp()+' createLastschrift?'+data, 
@@ -141,10 +142,10 @@ function handleRequest(req, res) {
     else if (urlParts.pathname=="/createUeberweisung") {
 	getPostData(req, function(data) {
 	    log('createUeberweisung');
-	    callPsas('createUeberweisung', data, function () {
-		log('Sent to Psas.');
+	    callPsas('createUeberweisung', data, function (psas) {
+		var link= getXMLParam(psas, 'Link');
+		sendConfirmationMail('create?'+data, link, 'mail1.txt');
 	    });
-	    sendConfirmationMail('create?'+data);
 	    saveEncryptedFile("donation_"+generateCode(10), 
 			      timeStamp()+' createUeberweisung?'+data, 
 			      function(err) {
@@ -154,9 +155,9 @@ function handleRequest(req, res) {
     }
     else if (urlParts.pathname=="/createPaypal") {
 	getPostData(req, function(data) {
-	    log('createPaypal');
-	    callPsas('createPayPal', data, function () {
-		log('Sent to Psas.');
+	    callPsas('createPayPal', data, function (psas) {
+		var link= getXMLParam(psas, 'Link');
+		sendConfirmationMail('create?'+data, link, 'mail3.txt');
 	    });
 	    saveEncryptedFile("donation_"+generateCode(10), 
 			      timeStamp()+' createPayPal?'+data, 
@@ -252,15 +253,16 @@ function encrypt(data, callback) {
     gpg.stdin.end();
 }
 
-function sendConfirmationMail(data) {
+function sendConfirmationMail(data, link, mailfile) {
     var query= url.parse(data, true).query;
     if (query.mail) {
-	fs.readFile('mail.txt', function(err, body) {
+	fs.readFile(mailfile, function(err, body) {
 	    if (body) {
 		var data= body.toString();
 		data= data.replace(/\${NAME}/g, query.name);
 		data= data.replace(/\${TOKEN}/g, query.token);
 		data= data.replace(/\${BETRAG}/g, query.betrag);
+		data= data.replace(/\${MESSAGETOKEN}/g, link);
 
 		var mail= spawn('mail', ['-s','PirateStarter',
 					 '-aFrom:piratestarter@piratenpartei-bayern.de',
@@ -274,4 +276,11 @@ function sendConfirmationMail(data) {
 	    }
 	});
     }
+    log('Confirmed.');
+}
+
+// Parse an xml parameter
+function getXMLParam(response, name) {
+    var m=response.match('<'+name+'>(.*)</'+name+'>');
+    return m ? m[1] : undefined;
 }
