@@ -101,7 +101,7 @@ function processUrlParameters() {
     if (urlParamStartPage) {
 	showPage(urlParamStartPage[1], "init");
     } else {
-	if (Math.random()<0.8)
+	if (Math.random()<0.5)
 	    showPage("page1_plain", "init");
 	else
 	    showPage("page1_twitter", "init");
@@ -171,7 +171,7 @@ function init_page1_twitter() {
     $.get('/getBotschaft', function(msg) {
 	var twitter= getParam(msg, 'TwitterName').replace(/^@/,'');
 	var text= getParam(msg, 'Spruch');
-	$('#spruch').text(text);
+	$('#spruch').text('@'+twitter+': '+text);
 	$('#follow').attr('href','https://twitter.com/'+twitter);
 	$('#twtlink').attr('href','https://twitter.com/'+twitter);
 	// twitter include code
@@ -198,6 +198,10 @@ function init_page1_plain() {
 function init_page2() {
     if (!token)
 	$.get('/createToken?myid='+myid, function(msg) { token= msg; });
+}
+
+function init_page3() {
+    $('.ifeur').toggle($('#currency').val()=="eur");
 }
 
 function pageTransferOrBtc() {

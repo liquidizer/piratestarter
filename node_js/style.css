@@ -25,6 +25,10 @@ a {
     font-size:12px;
     font-weight:normal;
 }
+#page1_twitter .small {
+    font-size:15px;
+}
+
 p.bold {
     line-hight: 80%;
     margin: 3px 0 3px 0;
@@ -206,7 +210,7 @@ input.janein.hover:checked + label {
 
 /* TWITTER SPRUCH */
 .wide #spruch {
-    width:300px;
+    width:280px;
 }
 
 /* PAGE1: jetzt spenden */
@@ -224,8 +228,8 @@ input.janein.hover:checked + label {
     position: relative;
     top: -15px;
 }
-.wide .wideindent {
-    margin: 0 0 0 50px;
+.wide .page > div.text.wideindent {
+    margin: 0 50 0 100px;
 }
 
 /* PAGE2: Betrag eingeben */
