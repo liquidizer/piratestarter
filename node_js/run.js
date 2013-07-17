@@ -109,7 +109,12 @@ function handleRequest(req, res) {
 		var data='';
 		red.on('data', function(chunk) { data+=chunk.toString(); });
 		red.on('end', function() {
-		    var img= data.match(/src=\"(https:\/\/si0.twimg.com\/profile_images\/[^\"]*)/)[1];
+		    var imgMatch= data.match(/src=\"(https:\/\/si0.twimg.com\/profile_images\/[^\"]*)/);
+		    var img='';
+		    if (imgMatch)
+			img= imgMatch[1];
+		    else
+			log('invalid twitter image for '+name);
 		    twtCache[name]=img;
 		    res.end(img);
 		});

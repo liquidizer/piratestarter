@@ -169,7 +169,7 @@ function init_page1_twitter() {
     initStatus(false);
 
     $.get('/getBotschaft', function(msg) {
-	var twitter= getParam(msg, 'TwitterName').replace(/^@/,'');
+	var twitter= getParam(msg, 'TwitterName').replace(/^@| /g,'');
 	var text= getParam(msg, 'Spruch');
 	$('#spruch').text('@'+twitter+': '+text);
 	$('#follow').attr('href','https://twitter.com/'+twitter);
