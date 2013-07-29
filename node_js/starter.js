@@ -71,9 +71,10 @@ function processUrlParameters() {
 	    $('#zweck').append("<option value='"+zweck+"'>"+zweck+"</option>");
 	});
 	$('#zweck').val(zwecke[0]);
-    } else {
+    }
+    if ($('#zweck option').length==1) {
 	$('#zweck').hide()
-	$('#zweck').after("Wahlkampf Bayern");
+	$('#zweck').after($('#zweck option').text());
     }
     var urlParamBetrag= location.search.match('[?&]betrag=([^&]*)');
     if (urlParamBetrag) {
