@@ -209,8 +209,8 @@ input.janein.hover:checked + label {
 }
 
 /* TWITTER SPRUCH */
-.wide #spruch {
-    width:280px;
+.wide div.msgdiv {
+    width:350px;
 }
 
 /* PAGE1: jetzt spenden */
