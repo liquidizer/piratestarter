@@ -7,12 +7,21 @@
     <script type="text/javascript" src="jquery-latest.min.js"></script>
     <script type="text/javascript" src="jquery-ui-git.js"></script>
     <script type="text/javascript" src="starter.js"></script>
+    <style>
+      .page:not(#js_error) { display: none }
+      #js_error { margin: 50px 0 0 0 }
+    </style>
   </head>
   <body>
     <img id="background" src=""/>
     <div id="header">
       <div class="bar">&nbps;</div>
       <a href="http://piratestarter.de" target="_blank"><img id="header-img" src=""/></a>
+    </div>
+    <div class="page" id="js_error">
+      <div class="text">
+	Bitte JavaScript anschalten um das Spendenapplet zu aktivieren.
+      </div>
     </div>
     <div id="page1_twitter" class="page">
       <div></div>
