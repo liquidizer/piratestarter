@@ -64,7 +64,7 @@ function processUrlParameters() {
     if (urlId) {
 	myid= urlId[1];
     }
-    var urlParamZweck= location.search.match('[?&]zwecke=([^&]*)');
+    var urlParamZweck= location.search.match('[?&]zwecke2=([^&]*)');
     if (urlParamZweck) {
 	var zwecke= decodeURI(urlParamZweck[1]).split(/,|\|/);
 	zwecke.forEach(function (zweck) {

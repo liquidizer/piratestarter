@@ -59,7 +59,7 @@ function getSrc(isLocal, startPage) {
 	    .filter(function(x) { return x.length>0; })
 	    .join('|');
 	if (zwecke.length>0)
-	    src= addParam(src, 'zwecke='+encodeURI(zwecke));
+	    src= addParam(src, 'zwecke2='+encodeURI(zwecke));
     }
     if (parseFloat($('#betrag').val())!=25) {
 	src= addParam(src, 'betrag='+$('#betrag').val());
